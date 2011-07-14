@@ -1,0 +1,217 @@
+body
+{
+	background-color: #AAAAAA; /* S�tter den gr� baggrundsfarve */
+	margin-top:0; /* siden skal g� helt op til toppen */
+	font-family: helvetica, verdana, courier; /* Helvetica er p�nt */
+}
+
+.thestyle { /* thestyle er en klasse jeg bruger til at centrere det b�nd alting st�r p� */
+	width: 60em; 
+	margin-left: auto;
+	margin-right: auto;
+}
+ 
+table { /* Tabeller skal te sig ordentligt */
+	padding:0;
+	margin:0;
+	position:relative;
+}
+
+.tider 
+{
+		border-collapse: collapse;
+}
+
+.begin_act
+{
+	border-top-color: red;
+	border-top-width:2px;
+	border-top-style:solid;
+}
+
+.end_act
+{
+	border-bottom-color: red;
+	border-bottom-width:2px;
+	border-bottom-style:solid;
+}
+
+.tider td
+{
+	font-size:75%;
+	padding: 0.5em;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align:center;
+}
+
+.aktivitet { /* Klassen der bruges til at s�tte baggrundsfarven og tekstfarven p� aktiviteter */
+	color: #dddddd;
+	background-color: #222222;
+	 }
+	 
+.newsheadline {
+	font-weight: bold;
+	font-size: large;
+	color: black;
+	}
+
+.newsdesc {
+	font-weight: normal;
+	font-size: small;
+	color: black;
+	}
+
+.newstimestamp {
+	font-weight: normal;
+	font-size: x-small;
+	color: gray;
+	float: right;
+	}
+
+.input {
+		width:80%;
+		vertical-align: top;
+	}
+	
+hr {
+	width: 6em;
+	text-align: left;
+	margin: 0 auto 0 0; /*this will align it left for Mozilla*/
+	}
+	
+.legend{
+	width: 14em;
+	vertical-align: top;
+	font-weight: normal;
+	font-size: x-small;
+	color: gray;
+	}
+
+/* De n�ste tre er tricks jeg bruger sammen med display:table; i #top til at f� en lige afstand mellem billederne i top div'en */
+#top span
+	{
+	display: table-cell;
+	}
+#top span img
+	{
+	float: right;
+	}
+#top span:first-child
+	{
+	width: 1px;
+	}
+
+#top /* Top er den div der holder de logoet og de fire flavor billeder. Menuen bliver flyttet hen oven p� denne div.*/
+{
+	display:table; 
+	background-color: white; /* Den skal have hvid baggrund */
+}
+
+#menu
+{
+	position: relative;
+	top: -2.5em;
+	height: 22px;
+	z-index:30;
+	background-color: black;
+	text-align:left;
+}
+
+#whitebox {
+	position:relative;
+	top:-22px;
+	background-color: white;
+	z-index:10;
+	padding: 2em 0em 2em 0em;/**/
+}
+
+#content {
+	line-height:170%;
+	margin: 0em 3em 0em 3em;/*0em 7em 0em 7em;*/
+	z-index:20;
+}
+
+h1
+{
+	font-size:larger;
+}
+
+h2
+{
+	font-size: large;
+	font-weight: normal;
+	font-style: italic;
+}
+
+#footer
+{
+	color: #cb391d;
+	height: 130px;
+	padding-top:10px;
+	position: relative;
+	top:-22px;
+	z-index:15;
+	background-color: black;
+	text-align: center;
+	border:0;
+}
+
+/* HER BEGYNDER DROP DOWN DELEN */
+
+#nav, #nav ul
+{
+	padding-left: 1em;
+
+	margin: 0;
+	list-style: none;	
+}
+
+#nav a
+{
+	padding-top: 2px;
+	padding-bottom: 4px;
+	text-decoration: none;
+	text-transform: none;
+	color: White;
+	font-size: smaller;
+	display: block;
+	margin-right: 3em;
+	margin-left: 13px;
+}
+
+#nav a:hover, #nav a:active
+{
+	color: #cb391d;
+}
+
+#nav li
+{	
+	float:left;
+}
+
+#nav li ul
+{
+	position:absolute;
+	width: 10em;
+	left: -999em;
+	background-image: url('../images/75.png');
+	padding: 0.5em 0 0.5em 0;
+	border: solid 2px #cb391d;
+	border-top: none;
+}
+#nav li ul li a
+{
+	margin-right: 2em;
+	margin-left: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+#nav li:hover ul, #nav li.sfhover ul
+{
+	left:auto;
+}
+
+#nav li:hover, #nav li.hover {
+    position: static;
+}
