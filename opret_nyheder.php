@@ -8,7 +8,14 @@ function myTags($param) {
 
 	$str = preg_replace('/(http[^\s]+(?<!(png|jpg|gif)))\s([^\s$]+)(\s|$)/', '<a href="\1">\3</a>\4', $str);
 	
+	$str = preg_replace('/' . PHP_EOL . PHP_EOL . '/', '</p><p>', $str);
+	
+	$str = preg_replace('/\n/', '<br/>', $str);
+	
 	$str = str_replace('¤',	' ', $str);
+	
+	$str = str_replace('</p>', '</p>'.PHP_EOL, $str);
+	
 	return $str;
 }
 
@@ -20,7 +27,7 @@ if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['me
 	$admin_id = $_SESSION['SESS_ADMIN_ID'];
 	
 	mysql_query('begin');
-	mysql_query('INSERT into NEWS (admin_id, title, meta_desc, content) values (' . $admin_id . ', \'' . $title . '\', \'' . $meta_desc . '\', \'' . $content	. '\');', $inscon) or die(mysql_error());
+	mysql_query('INSERT into news (admin_id, title, meta_desc, content) values (' . $admin_id . ', \'' . $title . '\', \'' . $meta_desc . '\', \'' . $content	. '\');', $inscon) or die(mysql_error());
 	$justinserted = mysql_insert_id();
 
 	if(mysql_error())

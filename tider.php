@@ -25,9 +25,9 @@
 	<div class="thestyle" id="whitebox">
 		<div id="content">
 			<h1>Træningstider</h1>
-			<img src="images/tider.png" />
+			<?php require_once 'includes/timetable.php'; ?> 
 		</div>
 	</div>
-	<div id="footer" class="thestyle"></div>
+	<div id="footer" class="thestyle">&nbsp;</div>
 </body>
 </html>
