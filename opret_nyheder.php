@@ -2,13 +2,22 @@
 <?php include_once 'includes/dbcrudconfig.php'; ?>
 <?php
 
+function myTags($param) {
+	
+	$str = preg_replace('/([^\s]+\.(png|jpg|jpeg|gif))(\s)/', '<img¤src="\1"¤/>\3', $param);
+
+	$str = preg_replace('/(http[^\s]+(?<!(png|jpg|gif)))\s([^\s]+)(\s)/', '<a href="\1">\3</a>\4', $str);
+	
+	$str = str_replace('¤',	' ', $str);
+	return $str;
+}
+
 if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['meta_desc'])){
 
 	$title = htmlentities($_POST['title'],ENT_QUOTES, 'UTF-8');
-	$content = htmlentities($_POST['newscontent'],ENT_QUOTES, 'UTF-8');
+	$content = myTags(htmlentities($_POST['newscontent'],ENT_QUOTES, 'UTF-8'));
 	$meta_desc = htmlentities($_POST['meta_desc'],ENT_QUOTES, 'UTF-8');
 	$admin_id = $_SESSION['SESS_ADMIN_ID'];
-
 	
 	mysql_query('begin');
 	mysql_query('INSERT into NEWS (admin_id, title, meta_desc, content) values (' . $admin_id . ', \'' . $title . '\', \'' . $meta_desc . '\', \'' . $content	. '\');', $inscon) or die(mysql_error());
@@ -49,7 +58,7 @@ if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['me
 				<table>
 					<tr>
 						<td style="text-align: right;" class="legend">titel</td>
-						<td class="input"><input style="width: 98%;" name="title"
+						<td class="input"><input style="width: 66%;" name="title"
 							id="title" type="text" /></td>
 						<td class="legend">feltet kan indeholde 128 tegn. Det er titelen
 							som står i toppen af browseren og er linket på googles
@@ -57,7 +66,7 @@ if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['me
 					</tr>
 					<tr>
 						<td style="text-align: right;" class="legend">kort beskrivelse</td>
-						<td class="input"><input style="width: 98%;" name="meta_desc"
+						<td class="input"><input style="width: 66%;" name="meta_desc"
 							id="meta_desc" type="text" /></td>
 						<td class="legend">feltet kan indeholde 155 tegn. Den korte
 							beskrivelse bruges på nyheds indexsiden, forsiden og står under
@@ -65,7 +74,7 @@ if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['me
 					</tr>
 					<tr>
 						<td style="text-align: right;" class="legend">indhold</td>
-						<td class="input"><textarea style="width: 98%;" name="newscontent"
+						<td class="input"><textarea style="width: 66%;" name="newscontent"
 								id="newscontent" rows="10"></textarea></td>
 						<td class="legend">feltet indeholder din nyhed.</td>
 					</tr>
