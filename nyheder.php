@@ -12,7 +12,7 @@
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
 <title><?php echo $myNews['title']; ?></title>
-<meta http-equiv="description" content="<?php echo $myNews['meta_desc']; ?>" />
+<meta http-equiv="description" content="<?php echo preg_replace('/<[^>]*>/', '', $myNews['meta_desc']); ?>" />
 </head>
 <body onload="setAd();">
 	<div class="thestyle" id="top">

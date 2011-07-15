@@ -81,12 +81,31 @@ hr {
 	}
 	
 .legend{
-	width: 20em;
 	vertical-align: top;
 	font-weight: normal;
 	font-size: x-small;
 	color: gray;
 	}
+	
+.legend img{
+	vertical-align: -0.4em;
+}
+	
+div.legend{
+	position:absolute;
+	left: -999em;
+	background-image: url('../images/75.png');
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	border: solid 2px #cb391d;
+	text-align: left;
+	z-index: 5;
+	width: 30em;
+}
+
+.legend img:hover + div, .legend img.sfhover + div
+{
+	left:auto;
+}
 
 /* De n�ste tre er tricks jeg bruger sammen med display:table; i #top til at f� en lige afstand mellem billederne i top div'en */
 #top span
@@ -113,7 +132,7 @@ hr {
 	position: relative;
 	top: -2.5em;
 	height: 22px;
-	z-index:30;
+	z-index:7;
 	background-color: black;
 	text-align:left;
 }
@@ -122,14 +141,14 @@ hr {
 	position:relative;
 	top:-22px;
 	background-color: white;
-	z-index:10;
+	z-index:4;
 	padding: 2em 0em 2em 0em;/**/
 }
 
 #content {
 	line-height:170%;
 	margin: 0em 3em 0em 3em;/*0em 7em 0em 7em;*/
-	z-index:20;
+	z-index:2;
 }
 
 h1
@@ -151,7 +170,7 @@ h2
 	padding-top:10px;
 	position: relative;
 	top:-22px;
-	z-index:15;
+	z-index:3;
 	background-color: black;
 	text-align: center;
 	border:0;
@@ -162,7 +181,6 @@ h2
 #nav, #nav ul
 {
 	padding-left: 1em;
-
 	margin: 0;
 	list-style: none;	
 }

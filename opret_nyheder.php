@@ -4,9 +4,9 @@
 
 function myTags($param) {
 	
-	$str = preg_replace('/([^\s]+\.(png|jpg|jpeg|gif))(\s)/', '<img¤src="\1"¤/>\3', $param);
+	$str = preg_replace('/([^\s]+\.(png|jpg|gif))(\s|$)/', '<img¤src="\1"¤/>\3', $param);
 
-	$str = preg_replace('/(http[^\s]+(?<!(png|jpg|gif)))\s([^\s]+)(\s)/', '<a href="\1">\3</a>\4', $str);
+	$str = preg_replace('/(http[^\s]+(?<!(png|jpg|gif)))\s([^\s$]+)(\s|$)/', '<a href="\1">\3</a>\4', $str);
 	
 	$str = str_replace('¤',	' ', $str);
 	return $str;
@@ -16,7 +16,7 @@ if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['me
 
 	$title = htmlentities($_POST['title'],ENT_QUOTES, 'UTF-8');
 	$content = myTags(htmlentities($_POST['newscontent'],ENT_QUOTES, 'UTF-8'));
-	$meta_desc = htmlentities($_POST['meta_desc'],ENT_QUOTES, 'UTF-8');
+	$meta_desc = myTags(htmlentities($_POST['meta_desc'],ENT_QUOTES, 'UTF-8'));
 	$admin_id = $_SESSION['SESS_ADMIN_ID'];
 	
 	mysql_query('begin');
@@ -37,6 +37,7 @@ if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['me
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
@@ -57,29 +58,29 @@ if (isset($_POST['title']) AND isset($_POST['newscontent']) AND isset($_POST['me
 			<form id="" method="post" action="opret_nyheder.php">
 				<table>
 					<tr>
-						<td style="text-align: right;" class="legend">titel</td>
-						<td class="input"><input style="width: 66%;" name="title"
-							id="title" type="text" /></td>
-						<td class="legend">feltet kan indeholde 128 tegn. Det er titelen
+						<td style="text-align: right;" class="legend">titel&nbsp;<img src="images/info.gif" /><div class="legend">Feltet kan indeholde 128 tegn. Det er titelen
 							som står i toppen af browseren og er linket på googles
-							søgeresultat.</td>
+							søgeresultat.</div></td>
+						<td class="input"><input style="width: 88%;" name="title"
+							id="title" type="text" /></td>
+						
 					</tr>
 					<tr>
-						<td style="text-align: right;" class="legend">kort beskrivelse</td>
-						<td class="input"><input style="width: 66%;" name="meta_desc"
-							id="meta_desc" type="text" /></td>
-						<td class="legend">feltet kan indeholde 155 tegn. Den korte
+						<td style="text-align: right;" class="legend">kort beskrivelse&nbsp;<img src="images/info.gif" /><div class="legend">Feltet kan indeholde 155 tegn. Den korte
 							beskrivelse bruges på nyheds indexsiden, forsiden og står under
-							overskriften på googles søgeresultat.</td>
+							overskriften på googles søgeresultat.</div></td>
+						<td class="input"><input style="width: 88%;" name="meta_desc"
+							id="meta_desc" type="text" /></td>
+						
 					</tr>
 					<tr>
-						<td style="text-align: right;" class="legend">indhold</td>
-						<td class="input"><textarea style="width: 66%;" name="newscontent"
+						<td style="text-align: right;" class="legend">indhold&nbsp;<img src="images/info.gif" /><div class="legend">Feltet indeholder din nyhed. Der er umiddelbart ingen begrænsning på længden.<br /><br /><em>Links:</em><br />Man laver links ved at skrive adressen på det man vil linke til inden det ord man vil have til at være et link. f.eks.:<br />http://www.google.com link. Man kan ikke lave links der bruger flere ord.<br /><br /><em>Billeder:</em><br />Du tilføjer et billede ved at skrive stien til billedet. Billedet skal være af typen jpg, png eller gif. f.eks.:<br />http://nordjyskkampsport.dk/images/jeppeguillo.png eller images/fairtex.png</div></td>
+						<td class="input"><textarea style="width: 88%;" name="newscontent"
 								id="newscontent" rows="10"></textarea></td>
-						<td class="legend">feltet indeholder din nyhed.</td>
+						
 					</tr>
 					<tr>
-						<td><input type="submit" /></td>
+						<td><input type="submit" value="Opret nyhed" /></td>
 					</tr>
 				</table>
 			</form>
