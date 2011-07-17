@@ -28,6 +28,21 @@
 		<div id="content">
 			<h1><?php echo $style['name'] . ' i Nordjysk Kampsportscenter'; ?></h1>
 			<?php echo $style['description']; ?>
+		<h2><a href="/tider.php">Træningstider:</a></h2>
+		<table>
+		<?php 
+		for ($i = 0; $i < count($style['schedule']); $i++) {
+			echo ' 
+		<tr>
+		<td>' . $style['schedule'][$i]['day'] . ':</td><td>' . $style['schedule'][$i]['begin'] . ' - ' . $style['schedule'][$i]['end'] . '</td><td class="legend">' . $style['schedule'][$i]['note'] . '</td>
+		</tr>
+		';
+		}
+		?>
+		</table>
+		<h2><a href="/instruktoerer.php">Instruktører</a></h2>
+		
+		<?php show_instructors_for($style['id']);?>
 		</div>
 	</div>
 	<div id="footer" class="thestyle"></div>

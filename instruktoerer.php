@@ -28,7 +28,7 @@
 			<h1>Instruktører</h1>
 			<p>Nordjysk kampsportscenter har et sæt motiverede instruktører som udmærker sig i de discipliner de underviser.</p>
 			<?php 
-				show_instructor_list();
+				show_full_instructor_list();
 			?>	
 		</div>
 	</div>
