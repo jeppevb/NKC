@@ -2,7 +2,7 @@
 include_once 'includes/dbqueryconfig.php';
 session_start();
 $login = htmlentities($_POST['login']);
-$password = md5($_POST['password']);
+$password = hash('sha256', $_POST['password']);
 
 $qry='SELECT id FROM admins WHERE login=\'' . $login . '\' AND password=\'' . $password . '\'';
 $result=mysql_query($qry, $qcon);
@@ -14,9 +14,11 @@ if(mysql_num_rows($result) == 1) {
 	$admin=mysql_fetch_assoc($result);
 	$_SESSION['SESS_ADMIN_ID']=$admin['id'];
 
-	//Write session to disk
 	session_write_close();
-	header('location: opret_nyheder.php');
+	if ($_POST['target'] != '')
+		header('location: ' . $_POST['target']);
+	else 
+		header('location: /admin.php');
 	exit();
 }else{
 	$_SESSION['ERRMSG_ARR'] = 'login fejlede';

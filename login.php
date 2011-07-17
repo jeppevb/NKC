@@ -1,6 +1,6 @@
 <?php include_once 'includes/header.php';?>
 <?php include_once 'includes/ads.php';?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -24,13 +24,13 @@
 	</div>
 	<div class="thestyle" id="whitebox">
 		<div id="content">
-			<form id="loginForm" name="loginForm" method="post"
+			<form id="loginForm" method="post"
 				action="login_check.php">
-				<table width="300" border="0" align="center" cellpadding="2"
+				<table width="300" border="0" cellpadding="2"
 					cellspacing="0">
 					<tr>
-						<td width="112"><b>Login</b></td>
-						<td width="188"><input name="login" type="text" class="textfield"
+						<td style="width:112px;"><b>Login</b><input id="target" name="target" type="hidden" value="<?php session_start(); if(isset($_SESSION['target'])){ echo $_SESSION['target']; } session_write_close();?>" /></td>
+						<td style="width:188px;"><input name="login" type="text" class="textfield"
 							id="login" /></td>
 					</tr>
 					<tr>

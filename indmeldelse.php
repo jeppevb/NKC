@@ -9,7 +9,7 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -47,6 +47,7 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 			
 			<!-- <FORM ACTION="https://portal.foreningsadministrator.dk/tilmeld.php" method="POST" autocomplete="OFF" id="FOADMEMBERSIGNUPFORM" onsubmit="return validateMe()">  -->
 			<form action="indmeldelse.php" method="post" id="FOADMEMBERSIGNUPFORM" onsubmit="return testme()">
+			<p>
 			Fornavn <input type="text" size="25" maxlength="100" name="MemberFirstname" value=""/><br/>
 			Mellemnavn <input type="text" size="25" maxlength="100" name="MemberMiddlename" value=""/><br/>
 			Efternavn <input type="text" size="25" maxlength="100" name="MemberLastname" value=""/><br/>
@@ -78,7 +79,9 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 			<input type="hidden" name="FOADSEC" value="8931e79a97958c3452461ec9cf4192b2" />
 			<input type="hidden" name="FOADNOTSEC" value="04045ytjhkghfdg324ddc521:1:1:1:0:1:1:1:1:1:1:1:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:" />
 			<input type="hidden" name="FOADELM" value="1:1:1:1:0:1:1:1:1:1:1:1:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:" />
+			</p>
 			</form>
+			
 		</div>
 	</div>
 	<div id="footer" class="thestyle"></div>

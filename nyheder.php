@@ -2,7 +2,8 @@
 <?php include_once 'includes/ads.php';?>
 <?php include_once 'includes/newshelper.php';?>
 <?php if(!isset($_GET['id'])) header('location: nyhedsindex.php'); else $myNews = fetch_news_for(htmlentities($_GET['id'])); ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php session_start();?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -27,6 +28,12 @@
 		<div id="content">
 			<span class="newsheadline"><?php echo $myNews['title'];?></span><span class="newstimestamp"><?php echo $myNews['created']; ?></span>
 			<p><?php echo $myNews['content'];?></p>
+			<?php
+			
+			if(isset($_SESSION['SESS_ADMIN_ID'])){
+				echo '<p><a href="/opret_nyheder.php?action=rmnews&id=' . htmlentities($_GET['id']) . '">slet</a>&nbsp<a href="/opret_nyheder.php?action=chnews&id=' . htmlentities($_GET['id']) . '">ret</a></p>';
+			}
+			?>
 		</div>
 	</div>
 	<div id="footer" class="thestyle"></div>

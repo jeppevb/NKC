@@ -11,7 +11,7 @@ $days[] = 'L&#248;rdag';
 $days[] = 'S&#248;ndag';
 
 function nameToColor($param) {
-	return '#'. substr(md5($param), 3, 6);
+	return '#'. substr(hash('sha256', $param), 2, 6);
 }
 
 $image_info = array();
@@ -23,8 +23,12 @@ $final_hour = -1;
 while ($row = mysql_fetch_array($result)) {
 	if(date('H', strtotime($row['begin']))<$first_hour)
 	$first_hour=date('H', strtotime($row['begin']));
-	if(date('H', strtotime($row['end']))>$final_hour)
-	$final_hour=date('H', strtotime($row['end']));
+	if(date('H', strtotime($row['end']))>$final_hour){
+		$final_hour=date('H', strtotime($row['end']));
+	}
+	if(date('i', strtotime($row['end']))>0 && 1+date('H', strtotime($row['end']))>$final_hour ){
+		$final_hour=1+date('H', strtotime($row['end']));
+	}
 }
 
 
@@ -35,7 +39,7 @@ $active_styles = mysql_query('select name, id from styles where id in (select di
 
 $image_info['y_offset'] = 15+20*mysql_num_rows($active_styles);
 
-$image_info['width'] = 750;
+$image_info['width'] = 850;
 $image_info['height'] = (90 + 40*($image_info['final_hour']-$image_info['first_hour']) + $image_info['y_offset']);
 
 $image_info['time_column_x_offset'] = 35;
@@ -86,16 +90,16 @@ for ($i = 0; $i < count($days); $i++) {
 <rect x="'. ($image_info['first_day_x_offset'] + (($i * $image_info['day_space'])-10 + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
 		($image_info['y_offset']+30+40*(date('H', strtotime($row['begin']))-$image_info['first_hour'])+10*(floor(date('i', strtotime($row['begin']))/15)))
 		. '" width="20" height="' .
-		(floor(10*((date('i', strtotime($row['end']))-date('i', strtotime($row['begin']))+
+		(10*(ceil((date('i', strtotime($row['end']))-date('i', strtotime($row['begin']))+
 		(60*(date('H', strtotime($row['end']))-date('H', strtotime($row['begin'])))))/15)))
-		. '" stroke="none" fill-opacity="0.75" fill="' . nameToColor($row['style']) . '" />
+		. '" stroke="none" fill-opacity="0.75" fill="' . nameToColor($row['style']) . '" /></a>
 ';
 		//if there is a note on the activity we draw an i and a hidden text to display
 		if($row['note'] != null){
 			echo '
-<text stroke-width="1" stroke="white" text-anchor="middle" fill="white" font-family="courier" font-size="15" x="'. ($image_info['first_day_x_offset'] + (($i * $image_info['day_space']) + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
-			($image_info['y_offset']+43+40*(date('H', strtotime($row['begin']))-$image_info['first_hour'])+10*(floor(date('i', strtotime($row['begin']))/15)))
-			. '" id="info_for_' . $row['style_id'] . '">i</text></a>' . PHP_EOL;
+<image id="info_for_' . $row['style_id'] . '" xlink:href="/images/info2.png" x="'. ($image_info['first_day_x_offset'] - 8  + (($i * $image_info['day_space']) + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
+			($image_info['y_offset']+43-11+40*(date('H', strtotime($row['begin']))-$image_info['first_hour'])+10*(floor(date('i', strtotime($row['begin']))/15)))
+			. '" width="16px" height="16px" />' . PHP_EOL;
 
 			drawNote($row['note'], $row['style_id'], $row['begin'], $row['area'], $i);
 		}
@@ -111,7 +115,7 @@ function drawNote($note, $id, $begin, $area, $iteration) {
 			. '" fill="white" stroke="#cb391d" stroke-width="1" font-family="helvetica" z-index="560" font-size="15" ' . 
 			'text-anchor="' . ((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?'start':'end') . '" >' . $note . '
 				<animate begin="info_for_' . $id . '.mouseover" attributeType="CSS" attributeName="opacity" from="0" to="1" dur="300ms" fill="freeze" />
-				<animate begin="info_for_' . $id . '.mouseout" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="4s" fill="freeze" />				
+				<animate begin="info_for_' . $id . '.mouseout" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" />				
 			</text>';
 }
 

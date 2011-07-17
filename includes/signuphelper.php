@@ -76,7 +76,7 @@ function save_and_request_confirmation($thePostArray){
 	mysql_query('begin');
 	mysql_query('INSERT INTO waiting_signups(firstname, middlename, lastname, address, zip, email, phone, mobile, sex, dob, comment, emailnotice, smsnotice, accepturl, declineurl, foadacc, foadcos, foadsec, foadnotsec, foadelm) values (\'' . $thePostArray['MemberFirstname'] . '\', \'' . $thePostArray['MemberMiddlename'] . '\', \'' . $thePostArray['MemberLastname'] . '\', \'' . $thePostArray['MemberAdress'] . '\', \'' . $thePostArray['MemberZip'] . '\', \'' . $thePostArray['MemberEmail'] . '\', \'' . $thePostArray['MemberPhone'] . '\', \'' . $thePostArray['MemberMobile'] . '\', \'' . $thePostArray['MemberSex'] . '\', \'' . $thePostArray['MemberBirth'] . '\', \'' . $thePostArray['MemberComment'] . '\', \'' . $thePostArray['MemberEmailNotice'] . '\', \'' . $thePostArray['MemberSMSNotice'] . '\', \'' . $thePostArray['ACCEPTURL'] . '\', \'' . $thePostArray['DECLINEURL'] . '\', \'' . $thePostArray['FOADACC'] . '\', \'' . $thePostArray['FOADCOS'] . '\', \'' . $thePostArray['FOADSEC'] . '\', \'' . $thePostArray['FOADNOTSEC'] . '\', \'' . $thePostArray['FOADELM'] . '\');', $inscon);
 	$justinserted = mysql_insert_id($inscon);
-	$myhash = md5($thePostArray['MemberFirstname'] . $justinserted . $thePostArray['MemberEmail']); 
+	$myhash = hash('sha256', $thePostArray['MemberFirstname'] . $justinserted . $thePostArray['MemberEmail']); 
 	mysql_query('UPDATE waiting_signups SET urlhash = \'' . $myhash . '\' where id = \'' . $justinserted . '\';', $inscon);
 	
 	if(mysql_error($inscon)){

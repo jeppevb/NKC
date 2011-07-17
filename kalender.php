@@ -1,7 +1,7 @@
 <?php include_once 'includes/header.php';?>
 <?php include_once 'includes/ads.php';?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -25,7 +25,7 @@
 	<div class="thestyle" id="whitebox">
 		<div id="content">
 			<h1>Kalender</h1>
-			<iframe src="http://www.google.com/calendar/embed?src=hk19bs6jh188rpphkc0gps9so8%40group.calendar.google.com&ctz=Europe/Copenhagen" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+			<object data="http://www.google.com/calendar/embed?src=hk19bs6jh188rpphkc0gps9so8%40group.calendar.google.com&ctz=Europe/Copenhagen" style="border: 0; width:800px; height: 600px;"></object>
 		</div>
 	</div>
 	<div id="footer" class="thestyle"></div>
