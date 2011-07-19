@@ -10,7 +10,7 @@ if (isset($_GET['krums'])) {
 		session_start();
 		$_SESSION['notification'] = 'Din e-mail er allerede bekræftet eller også er linket ikke blevet kopieret ind i browseren ordentligt.';
 		session_write_close();
-		header('location: notifikation.php');
+		header('location: /notifikation');
 		exit();
 	}
 
@@ -42,7 +42,7 @@ if (isset($_GET['krums'])) {
 	session_start();
 	$_SESSION['notification'] = 'Din e-mail nu bekræftet. Velkommen i klubben';
 	session_write_close();
-	header('location: notifikation');
+	header('location: /notifikation');
 }else{
 	header('location: /');
 }

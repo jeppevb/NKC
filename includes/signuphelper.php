@@ -30,7 +30,7 @@ function send_confirmation_mail($link_hash, $email_addr, $name) {
 						korrekt email adresse. Derfor skal du klike på linket herunder eller
 						kopiere det over i din browser.
 					</p>
-					<a href="http://nordjyskkampsport.dk/godkend.php?krums=' . $link_hash . '">http://nordjyskkampsport.dk/godkend.php?krums='
+					<a href="http://nordjyskkampsport.dk/godkend/' . $link_hash . '">http://nordjyskkampsport.dk/godkend/'
 						. $link_hash . '</a>
 				</div>
 			</body>

@@ -1,8 +1,7 @@
 
-
 RewriteEngine on
 
-RewriteRule ^nyheder/([0-9]+)(/.*)?$ /nyheder.php?id=$1
+RewriteRule ^nyheder/([0-9]+)[/]?.*$ /nyheder.php?id=$1
 RewriteRule ^nyheder[/]?$ /nyhedsindex.php
 
 RewriteRule ^referater[/]?$ /referater.php
@@ -16,10 +15,11 @@ RewriteRule ^herfinderduos[/]?$ /herfinderduos.php
 RewriteRule ^omnordjyskkampsportscenter[/]?$ /omnordjyskkampsportscenter.php
 RewriteRule ^historie[/]?$ /historie.php
 RewriteRule ^instruktoerer[/]?$ /instruktoerer.php
+RewriteRule ^notifikation[/]?$ /notifikation.php
 
-RewriteRule ^godkend/([^/]+)/(.*)$ /godkend.php$1
+RewriteRule ^godkend/([0-9a-f]+)$ /godkend.php?krums=$1
 RewriteRule ^stilart[/]?$ /stilart.php
-RewriteRule ^stilart/([0-9]+)(/.*)?$ /stilart.php?id=$1
+RewriteRule ^stilart/([0-9]+)[/]?.*$ /stilart.php?id=$1
 
 RewriteRule ^login[/]?$ /login.php
 
