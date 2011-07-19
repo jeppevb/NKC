@@ -13,16 +13,16 @@
 <script type="text/javascript">
 
 function supportsSvg() {
-   if (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "1.0"))
+   if (!(document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "1.0")))
    {
-		// redirect to some better table :S
+	   window.location = "/tider/simpel";
    }
 }
 </script>
 <title>Nordjysk Kampsportscenter - Hvornår træner vi?</title>
 <meta http-equiv="description" content="Her findes oversigten over de forskellige træningstider" />
 </head>
-<body onload="setAd();">
+<body onload="setAd();<?php echo (isset($_GET['style']) && $_GET['style'] == 'noSVG')?'':'supportsSvg();'; ?>">
 	<div class="thestyle" id="top">
 	<?php show_topbanner(); ?>
 	</div>
@@ -34,7 +34,13 @@ function supportsSvg() {
 	<div class="thestyle" id="whitebox">
 		<div id="content">
 			<h1>Træningstider</h1>
-			<?php require_once 'includes/timetable.php'; ?> 
+			<?php 
+			if (isset($_GET['style']) && $_GET['style'] == 'noSVG') {
+				require_once 'includes/timetable_nosvg.php';
+			}else{
+				require_once 'includes/timetable.php';
+			} 
+			?> 
 		</div>
 	</div>
 	<div id="footer" class="thestyle">&nbsp;</div>
