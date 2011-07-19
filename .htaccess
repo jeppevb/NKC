@@ -1,37 +1,35 @@
-
+Options +FollowSymlinks
 RewriteEngine on
+Options -Multiviews
 
-RewriteRule ^nyheder/([0-9]+)[/]?.*$ /nyheder.php?id=$1
-RewriteRule ^nyheder[/]?$ /nyhedsindex.php
+RewriteRule ^nyheder/([0-9]+)(/.*)*$ /nyheder.php?id=$1 [L]
 
-RewriteRule ^referater[/]?$ /referater.php
-RewriteRule ^bestyrelse[/]?$ /bestyrelse.php
-RewriteRule ^faciliteter[/]?$ /faciliteter.php
-RewriteRule ^tider[/]?$ /tider.php
-RewriteRule ^kalender[/]?$ /kalender.php
-RewriteRule ^indmeldelse[/]?$ /indmeldelse.php
-RewriteRule ^kontakt[/]?$ /kontakt.php
-RewriteRule ^herfinderduos[/]?$ /herfinderduos.php
-RewriteRule ^omnordjyskkampsportscenter[/]?$ /omnordjyskkampsportscenter.php
-RewriteRule ^historie[/]?$ /historie.php
-RewriteRule ^instruktoerer[/]?$ /instruktoerer.php
-RewriteRule ^notifikation[/]?$ /notifikation.php
+RewriteRule ^nyheder$ /nyhedsindex.php [L]
 
-RewriteRule ^godkend/([0-9a-f]+)$ /godkend.php?krums=$1
-RewriteRule ^stilart[/]?$ /stilart.php
-RewriteRule ^stilart/([0-9]+)[/]?.*$ /stilart.php?id=$1
-
-RewriteRule ^login[/]?$ /login.php
-
-RewriteRule ^admin[/]?$ /admin.php
-RewriteRule ^admin/mksched$ /admin.php?action=mksched
-RewriteRule ^admin/chsched/([0-9]+)$ /admin.php?action=chsched&schedid=$1
-RewriteRule ^admin/rmsched/([0-9]+)$ /admin.php?action=rmsched&schedid=$1
-RewriteRule ^admin/mkadmin/([A-Za-z0-9]+)/([0-9a-f]{64})$ /admin.php?action=mkadmin&login=$1&passHash=$2
-RewriteRule ^admin/chpass/([0-9]+)/([0-9a-f]{64})$ /admin.php?action=chpass&adminid=$1&passHash=$2
-RewriteRule ^admin/rmadmin/([0-9]+)$ /admin.php?action=rmadmin&adminid=$1
-
-RewriteRule ^opret_nyheder[/]?$ /opret_nyheder.php
-RewriteRule ^opret_nyheder/unrmnews/([0-9]+)[/]?$ /opret_nyheder.php?action=unrmnews&id=$1
-RewriteRule ^opret_nyheder/rmnews/([0-9]+)[/]?$ /opret_nyheder.php?action=rmnews&id=$1
-RewriteRule ^opret_nyheder/chnews/([0-9]+)[/]?$ /opret_nyheder.php?action=chnews&id=$1
+RewriteRule ^referater[/]?$ /referater.php [L]
+RewriteRule ^bestyrelse[/]?$ /bestyrelse.php [L]
+RewriteRule ^faciliteter[/]?$ /faciliteter.php [L]
+RewriteRule ^tider[/]?$ /tider.php [L]
+RewriteRule ^kalender[/]?$ /kalender.php [L]
+RewriteRule ^indmeldelse[/]?$ /indmeldelse.php [L]
+RewriteRule ^kontakt[/]?$ /kontakt.php [L]
+RewriteRule ^herfinderduos[/]?$ /herfinderduos.php [L]
+RewriteRule ^omnordjyskkampsportscenter[/]?$ /omnordjyskkampsportscenter.php [L]
+RewriteRule ^historie[/]?$ /historie.php [L]
+RewriteRule ^instruktoerer[/]?$ /instruktoerer.php [L]
+RewriteRule ^notifikation[/]?$ /notifikation.php [L]
+RewriteRule ^godkend/([0-9a-f]+)$ /godkend.php?krums=$1 [L]
+RewriteRule ^stilart[/]?$ /stilart.php [L]
+RewriteRule ^stilart/([0-9]+)[/]?.*$ /stilart.php?id=$1 [L]
+RewriteRule ^login[/]?$ /login.php [L]
+RewriteRule ^admin[/]?$ /admin.php [L]
+RewriteRule ^admin/mksched$ /admin.php?action=mksched [L]
+RewriteRule ^admin/chsched/([0-9]+)$ /admin.php?action=chsched&schedid=$1 [L]
+RewriteRule ^admin/rmsched/([0-9]+)$ /admin.php?action=rmsched&schedid=$1 [L]
+RewriteRule ^admin/mkadmin/([A-Za-z0-9]+)/([0-9a-f]{64})$ /admin.php?action=mkadmin&login=$1&passHash=$2 [L]
+RewriteRule ^admin/chpass/([0-9]+)/([0-9a-f]{64})$ /admin.php?action=chpass&adminid=$1&passHash=$2 [L]
+RewriteRule ^admin/rmadmin/([0-9]+)$ /admin.php?action=rmadmin&adminid=$1 [L]
+RewriteRule ^opret_nyheder[/]?$ /opret_nyheder.php [L]
+RewriteRule ^opret_nyheder/unrmnews/([0-9]+)[/]?$ /opret_nyheder.php?action=unrmnews&id=$1 [L]
+RewriteRule ^opret_nyheder/rmnews/([0-9]+)[/]?$ /opret_nyheder.php?action=rmnews&id=$1 [L]
+RewriteRule ^opret_nyheder/chnews/([0-9]+)[/]?$ /opret_nyheder.php?action=chnews&id=$1 [L]

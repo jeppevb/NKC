@@ -86,7 +86,7 @@ for ($i = 0; $i < count($days); $i++) {
 	while ($row = mysql_fetch_array($result)) {
 
 		echo '
-<a xlink:href="/stilart.php?id=' . $row['style_id'] . '">
+<a xlink:href="/stilart/' . $row['style_id'] . '/' . str_replace(' ', '_', $row['style']) . '">
 <rect x="'. ($image_info['first_day_x_offset'] + (($i * $image_info['day_space'])-10 + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
 		($image_info['y_offset']+30+40*(date('H', strtotime($row['begin']))-$image_info['first_hour'])+10*(floor(date('i', strtotime($row['begin']))/15)))
 		. '" width="20" height="' .

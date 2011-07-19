@@ -43,7 +43,7 @@ if(!isset($_GET['action'])){
 		exit();
 	}else{
 	$news['title'] = '';
-	$news['newscontent'] = '';
+	$news['content'] = '';
 	$news['meta_desc'] = '';
 }
 }elseif ($_GET['action'] == 'rmnews' && isset($_GET['id'])){
@@ -62,7 +62,7 @@ if(!isset($_GET['action'])){
 		$news = mysql_fetch_array(mysql_query('select * from news where id = ' . htmlentities($_GET['id']), $qcon));
 		if(!$news){
 			$news['title'] = '';
-			$news['newscontent'] = '';
+			$news['content'] = '';
 			$news['meta_desc'] = '';
 		}
 	}
@@ -137,7 +137,7 @@ if(!isset($_GET['action'])){
 								eller images/fairtex.png
 							</div></td>
 						<td class="input"><textarea style="width: 88%;" name="newscontent"
-								id="newscontent" rows="10"><?php echo htmlentities($news['newscontent']);?></textarea></td>
+								id="newscontent" rows="10"><?php echo htmlentities($news['content']); ?></textarea></td>
 
 					</tr>
 					<tr>

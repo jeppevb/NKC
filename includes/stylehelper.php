@@ -26,7 +26,7 @@ function fetch_style_index() {
 	$description = '<ul>';
 	while($row = mysql_fetch_array($result))
 	{
-		$description .= '<li><a href="/stilart/' . $row['id'] . '">' . $row['name'] . '</a></li>';	
+		$description .= '<li><a href="/stilart/' . $row['id'] . '/' . $row['name'] . '">' . $row['name'] . '</a></li>';	
 	}
 	
 	$description = $description . '</ul><p>Hvis du er interesseret i at prøve, så mød friskt op eller tag kontakt til en af vore instruktører. Det er også muligt at arrangere workshops for foreninger og uddannelsesinstitutioner via workshop@nordjyskkampsport.dk</p>';

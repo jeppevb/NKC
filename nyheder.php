@@ -1,7 +1,7 @@
 <?php include_once 'includes/header.php';?>
 <?php include_once 'includes/ads.php';?>
 <?php include_once 'includes/newshelper.php';?>
-<?php if(!isset($_GET['id'])) header('location: nyhedsindex.php'); else $myNews = fetch_news_for(htmlentities($_GET['id'])); ?>
+<?php $mynews = array(); if(!isset($_GET['id'])) header('location: /nyheder'); else $myNews = fetch_news_for(htmlentities($_GET['id'])); ?>
 <?php session_start();?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
