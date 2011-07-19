@@ -7,9 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"
+<link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
-<link rel="icon" type="image/icon" href="favicon.ico" />
+<link rel="icon" type="image/icon" href="/favicon.ico" />
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
 <title><?php echo $style['name']; ?> i Nordjysk Kampsportscenter</title>
@@ -40,7 +40,7 @@
 		}
 		?>
 		</table>
-		<h2><a href="/instruktoerer.php">Instruktører</a></h2>
+		<h2><a href="/instruktoerer">Instruktører</a></h2>
 		
 		<?php show_instructors_for($style['id']);?>
 		</div>

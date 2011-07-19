@@ -97,11 +97,11 @@ for ($i = 0; $i < count($days); $i++) {
 		//if there is a note on the activity we draw an i and a hidden text to display
 		if($row['note'] != null){
 			echo '
-<image id="info_for_' . $row['style_id'] . '" xlink:href="/images/info2.png" x="'. ($image_info['first_day_x_offset'] - 8  + (($i * $image_info['day_space']) + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
+<image id="info_for_' . $row['id'] . '" xlink:href="/images/info2.png" x="'. ($image_info['first_day_x_offset'] - 8  + (($i * $image_info['day_space']) + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
 			($image_info['y_offset']+43-11+40*(date('H', strtotime($row['begin']))-$image_info['first_hour'])+10*(floor(date('i', strtotime($row['begin']))/15)))
 			. '" width="16px" height="16px" />' . PHP_EOL;
 
-			drawNote($row['note'], $row['style_id'], $row['begin'], $row['area'], $i);
+			drawNote($row['note'], $row['id'], $row['begin'], $row['area'], $i);
 		}
 	}
 }

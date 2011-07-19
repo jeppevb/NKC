@@ -5,11 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"
+<link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
-<link rel="icon" type="image/icon" href="favicon.ico" />
+<link rel="icon" type="image/icon" href="/favicon.ico" />
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
+<script type="text/javascript">
+
+function supportsSvg() {
+   if (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "1.0"))
+   {
+		// redirect to some better table :S
+   }
+}
+</script>
 <title>Nordjysk Kampsportscenter - Hvornår træner vi?</title>
 <meta http-equiv="description" content="Her findes oversigten over de forskellige træningstider" />
 </head>

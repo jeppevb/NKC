@@ -24,7 +24,7 @@ if(mysql_num_rows($result) == 1) {
 	$_SESSION['ERRMSG_ARR'] = 'login fejlede';
 	unset($_SESSION['SESS_ADMIN_ID']);
 	session_write_close();
-	header('location: login.php');
+	header('location: /login');
 	exit();
 }
 ?>

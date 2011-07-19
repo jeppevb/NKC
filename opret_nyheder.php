@@ -19,6 +19,9 @@ function myTags($param) {
 
 	return $str;
 }
+
+$news = array();
+
 if(!isset($_GET['action'])){
 	if (isset($_POST['title']) && isset($_POST['newscontent']) && isset($_POST['meta_desc'])){
 
@@ -28,31 +31,34 @@ if(!isset($_GET['action'])){
 		$admin_id = $_SESSION['SESS_ADMIN_ID'];
 
 		mysql_query('begin');
-		mysql_query('insert into news (admin_id, title, meta_desc, content) values (' . $admin_id . ', \'' . $title . '\', \'' . $meta_desc . '\', \'' . $content	. '\');', $inscon) or die(mysql_error());
-		$justinserted = mysql_insert_id();
+		mysql_query('insert into news (admin_id, title, meta_desc, content) values (' . $admin_id . ', \'' . $title . '\', \'' . $meta_desc . '\', \'' . $content	. '\');', $inscon);
+		$justinserted = mysql_insert_id($inscon);
 
 		if(mysql_error())
 		mysql_query('rollback');
 		else
 		mysql_query('commit');
-		mysql_close($con);
-		header('location: nyheder.php?id=' . $justinserted);
+		
+		header('location: /nyheder/' . $justinserted . '/' . $title);
 		exit();
-	}
-}elseif ($_GET['action'] == 'rmnews'){
+	}else{
+	$news['title'] = '';
+	$news['newscontent'] = '';
+	$news['meta_desc'] = '';
+}
+}elseif ($_GET['action'] == 'rmnews' && isset($_GET['id'])){
 	mysql_query('update news set deleted = 1 where id = ' . htmlentities($_GET['id']), $inscon);
-	header('Location: /admin.php');
+	header('Location: /admin');
 	exit();
-}elseif ($_GET['action'] == 'unrmnews'){
+}elseif ($_GET['action'] == 'unrmnews' && isset($_GET['id'])){
 	mysql_query('update news set deleted = 0 where id = ' . htmlentities($_GET['id']), $inscon);
-	header('Location: /nyheder.php?id=' . htmlentities($_GET['id']));
+	header('Location: /nyheder/' . htmlentities($_GET['id']));
 	exit();
 }elseif ($_GET['action'] == 'chnews'){
 	if (isset($_POST['title']) && isset($_POST['newscontent']) && isset($_POST['meta_desc'])){
 		mysql_query('update news set title = \'' . $_POST['title'] . '\', content = \'' . $_POST['newscontent'] . '\', meta_desc = \'' . $_POST['meta_desc'] . '\' where id = ' . htmlentities($_GET['id']), $inscon);
-		header('location: nyheder.php?id=' . htmlentities($_GET['id']));
+		header('location: /nyheder/' . htmlentities($_GET['id']));
 	}else{
-
 		$news = mysql_fetch_array(mysql_query('select * from news where id = ' . htmlentities($_GET['id']), $qcon));
 		if(!$news){
 			$news['title'] = '';
@@ -70,9 +76,9 @@ if(!isset($_GET['action'])){
 <head>
 
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"
+<link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
-<link rel="icon" type="image/icon" href="favicon.ico" />
+<link rel="icon" type="image/icon" href="/favicon.ico" />
 <title>Skriv nye nyheder til nordjyskkampsportscenter</title>
 </head>
 <body>
@@ -94,11 +100,11 @@ if(!isset($_GET['action'])){
 	</div>
 	<div class="thestyle" id="whitebox">
 		<div id="content">
-			<form id="" method="post" action="opret_nyheder.php<?php echo (isset($_GET['action'])&&$_GET['action'] == 'chnews')?'?action=chnews&id=' . $_GET['id']:'';?>">
+			<form id="" method="post" action="/opret_nyheder<?php echo (isset($_GET['action'])&&$_GET['action'] == 'chnews')?'/chnews/' . $_GET['id']:'';?>">
 				<table>
 					<tr>
 						<td style="text-align: right;" class="legend">titel&nbsp;<img
-							src="images/info.gif" />
+							src="/images/info.gif" />
 							<div class="legend">Feltet kan indeholde 128 tegn. Det er titelen
 								som står i toppen af browseren og er linket på googles
 								søgeresultat.</div></td>
@@ -108,7 +114,7 @@ if(!isset($_GET['action'])){
 					</tr>
 					<tr>
 						<td style="text-align: right;" class="legend">kort
-							beskrivelse&nbsp;<img src="images/info.gif" />
+							beskrivelse&nbsp;<img src="/images/info.gif" />
 							<div class="legend">Feltet kan indeholde 155 tegn. Den korte
 								beskrivelse bruges på nyheds indexsiden, forsiden og står under
 								overskriften på googles søgeresultat.</div></td>
@@ -118,7 +124,7 @@ if(!isset($_GET['action'])){
 					</tr>
 					<tr>
 						<td style="text-align: right;" class="legend">indhold&nbsp;<img
-							src="images/info.gif" />
+							src="/images/info.gif" />
 							<div class="legend">
 								Feltet indeholder din nyhed. Der er umiddelbart ingen
 								begrænsning på længden.<br /> <br /> <em>Links:</em><br />Man
@@ -131,7 +137,7 @@ if(!isset($_GET['action'])){
 								eller images/fairtex.png
 							</div></td>
 						<td class="input"><textarea style="width: 88%;" name="newscontent"
-								id="newscontent" rows="10"><?php echo htmlentities($news['content']);?></textarea></td>
+								id="newscontent" rows="10"><?php echo htmlentities($news['newscontent']);?></textarea></td>
 
 					</tr>
 					<tr>

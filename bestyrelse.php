@@ -5,11 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"
+<link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
 <link rel="icon" 
       type="image/icon" 
-      href="favicon.ico" />
+      href="/favicon.ico" />
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
 <title>Bestyrelsen i Nordjysk Kampsportscenter</title>
@@ -43,7 +43,7 @@
 			</table>
 			<p>
 				Man kan finde bestyrelsesmøderne og generalforsamlingens referater
-				på <a href="referater.php">referatsiden</a>. Du kan altid kontakte
+				på <a href="/referater/">referatsiden</a>. Du kan altid kontakte
 				bestyrelsen ved at sende en email til:<br /> <b>bestyrelse [schnâbel
 					A] nordjyskkampsport [punktum] dk</b>
 			</p>

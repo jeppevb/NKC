@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"
+<link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
-<link rel="icon" type="image/icon" href="favicon.ico" />
+<link rel="icon" type="image/icon" href="/favicon.ico" />
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
 <title>Nordjysk Kampsportscenter - Vores mission</title>
@@ -45,7 +45,7 @@
 				kampsportscenter.
 			</p>
 			<p>
-				Du kan læse vores <a href="NKCStatutes.pdf">vedtægter</a> med det samme, og du kan også <a href="indmeldelse.php">melde dig ind</a> i klubben online.
+				Du kan læse vores <a href="/NKCStatutes.pdf">vedtægter</a> med det samme, og du kan også <a href="/indmeldelse">melde dig ind</a> i klubben online.
 			</p>
 
 		</div>

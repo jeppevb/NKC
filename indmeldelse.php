@@ -13,8 +13,8 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"	type="text/css" />
-<link rel="icon" type="image/icon"  href="favicon.ico" />
+<link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"	type="text/css" />
+<link rel="icon" type="image/icon"  href="/favicon.ico" />
 
 <?php show_validate_js(); ?>
 
@@ -41,12 +41,12 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 			<p>Jeg ønsker medlemskab af Nordjysk Kampsportscenter. Jeg har læst klubbens vedtægter og ordensregler, og forpligter mig til at overholde disse. Jeg er indforstået med, at træning er under eget ansvar, og derfor kan jeg ikke gøre krav overfor klubben eller trænerne, ved eventuelle skader opstået under træningen.
 			</p>
 			<p>Ved udmeldelse skal der rettes skriftlig henvendelse til klubbens kasserer, enten via mail til kasserer@nordjyskkampsport.dk eller ved at lægge skrivelsen i bestyrelsesskabet i klublokalet. Vær opmærksom på, at vi af og til bruger både fotografering og videooptagelser for at promovere og dokumentere klubben. Hvis du foretrækker ikke at blive fotograferet og filmet, er det vigtigt, du meddeler din instruktør om dette. Vær også opmærksom på at du skal betale kontingentet via PBS. Spørg din instruktør eller kassereren hvis du er i tvivl om hvordan.</p>
-			<p>Deltager du på børnehold skal vi have underskrift fra dine forældre/værge. Der er <a href="indmeldelse.pdf">indmeldelsesblanketter</a> i klubben men du kan også hente en <a href="indmeldelse.pdf">her</a> og printe den ud.</p>
+			<p>Deltager du på børnehold skal vi have underskrift fra dine forældre/værge. Der er <a href="/indmeldelse.pdf">indmeldelsesblanketter</a> i klubben men du kan også hente en <a href="indmeldelse.pdf">her</a> og printe den ud.</p>
 			<hr/>
-			<p>Jeg accepterer NKCs <a href="NKCStatutes.pdf">vedtægter</a> og forstår at de beskriver de regler og rettigheder der gælder mig som medlem af klubben. <input type="checkbox" id="accept_bylaws" /></p>
+			<p>Jeg accepterer NKCs <a href="/NKCStatutes.pdf">vedtægter</a> og forstår at de beskriver de regler og rettigheder der gælder mig som medlem af klubben. <input type="checkbox" id="accept_bylaws" /></p>
 			
 			<!-- <FORM ACTION="https://portal.foreningsadministrator.dk/tilmeld.php" method="POST" autocomplete="OFF" id="FOADMEMBERSIGNUPFORM" onsubmit="return validateMe()">  -->
-			<form action="indmeldelse.php" method="post" id="FOADMEMBERSIGNUPFORM" onsubmit="return testme()">
+			<form action="/indmeldelse" method="post" id="FOADMEMBERSIGNUPFORM" onsubmit="return testme()">
 			<p>
 			Fornavn <input type="text" size="25" maxlength="100" name="MemberFirstname" value=""/><br/>
 			Mellemnavn <input type="text" size="25" maxlength="100" name="MemberMiddlename" value=""/><br/>

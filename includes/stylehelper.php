@@ -26,7 +26,7 @@ function fetch_style_index() {
 	$description = '<ul>';
 	while($row = mysql_fetch_array($result))
 	{
-		$description .= '<li><a href="stilart.php?id=' . $row['id'] . '">' . $row['name'] . '</a></li>';	
+		$description .= '<li><a href="/stilart/' . $row['id'] . '">' . $row['name'] . '</a></li>';	
 	}
 	
 	$description = $description . '</ul><p>Hvis du er interesseret i at prøve, så mød friskt op eller tag kontakt til en af vore instruktører. Det er også muligt at arrangere workshops for foreninger og uddannelsesinstitutioner via workshop@nordjyskkampsport.dk</p>';
@@ -65,7 +65,7 @@ function show_full_instructor_list() {
 	$styles = mysql_query('select id, name, head_coach_id, email from styles', $qcon);
 	while ($myStyle = mysql_fetch_array($styles)) {
 		$headcoach = mysql_fetch_array(mysql_query('select * from coaches where id = ' . $myStyle['head_coach_id'], $qcon));
-		echo '<li><a href="/stilart.php?id=' .$myStyle['id']. '"><b>' . $myStyle['name'] . '</b></a> - <em>' . $headcoach['name'] . '</em> - ' . $myStyle['email'];
+		echo '<li><a href="/stilart/' .$myStyle['id']. '"><b>' . $myStyle['name'] . '</b></a> - <em>' . $headcoach['name'] . '</em> - ' . $myStyle['email'];
 		$coaches = mysql_query('select * from coaches where id in (select coach_id from coaches_styles where style_id = ' . $myStyle['id'] . ') and id != ' . $myStyle['head_coach_id'], $qcon);
 		echo '<ul>';
 		while ($mycocoach = mysql_fetch_array($coaches)) {

@@ -14,49 +14,49 @@ function show_menu() {
 	global $qcon; 
 	
 	echo '		<ul id="nav">' . PHP_EOL;
-	echo '			<li><a href="omnordjyskkampsportscenter.php">Om Nordjysk' . PHP_EOL;
+	echo '			<li><a href="/omnordjyskkampsportscenter">Om Nordjysk' . PHP_EOL;
 	echo '					Kampsportscenter</a>' . PHP_EOL;
 	echo '				<ul>' . PHP_EOL;
-	echo '					<li><a href="bestyrelse.php">Bestyrelse</a>' . PHP_EOL;
+	echo '					<li><a href="/bestyrelse">Bestyrelse</a>' . PHP_EOL;
 	echo '					</li>' . PHP_EOL;
-	echo '					<li><a href="faciliteter.php">Faciliteter</a>' . PHP_EOL;
+	echo '					<li><a href="/faciliteter">Faciliteter</a>' . PHP_EOL;
 	echo '					</li>' . PHP_EOL;
-	echo '					<li><a href="herfinderduos.php">Her finder du os</a>' . PHP_EOL;
+	echo '					<li><a href="/herfinderduos">Her finder du os</a>' . PHP_EOL;
 	echo '					</li>' . PHP_EOL;
-	echo '					<li><a href="historie.php">Historie</a>' . PHP_EOL;
+	echo '					<li><a href="/historie">Historie</a>' . PHP_EOL;
 	echo '					</li>' . PHP_EOL;
-	echo '					<li><a href="instruktoerer.php">Instruktører</a>' . PHP_EOL;
+	echo '					<li><a href="/instruktoerer">Instruktører</a>' . PHP_EOL;
 	echo '					</li>' . PHP_EOL;
-	echo '					<li><a href="referater.php">Referater</a>' . PHP_EOL;
+	echo '					<li><a href="/referater">Referater</a>' . PHP_EOL;
 	echo '					</li>' . PHP_EOL;
 	echo '				</ul></li>' . PHP_EOL;
-	echo '			<li><a href="stilart.php">Aktiviteter</a>' . PHP_EOL;
+	echo '			<li><a href="/stilart">Aktiviteter</a>' . PHP_EOL;
 	echo '				<ul>' . PHP_EOL;
 					$result = mysql_query('SELECT name, id FROM styles', $qcon);
 					while ($row = mysql_fetch_array($result)) {
-						echo '					<li><a href="stilart.php?id=' . $row['id'] . '">' . $row['name'] . '</a>' . PHP_EOL;
+						echo '					<li><a href="/stilart/' . $row['id'] . '/' . str_replace(' ', '_', $row['name']) . '">' . $row['name'] . '</a>' . PHP_EOL;
 						echo '					</li>' . PHP_EOL;
 					}
 	echo '				</ul></li>' . PHP_EOL;
-	echo '			<li><a href="tider.php">Tider</a>' . PHP_EOL;
+	echo '			<li><a href="/tider">Tider</a>' . PHP_EOL;
 	echo '			</li>' . PHP_EOL;
-	echo '			<li><a href="kalender.php">Kalender</a>' . PHP_EOL;
+	echo '			<li><a href="/kalender">Kalender</a>' . PHP_EOL;
 	echo '			</li>' . PHP_EOL;
-	echo '			<li><a href="indmeldelse.php">Indmeldelse</a>' . PHP_EOL;
+	echo '			<li><a href="/indmeldelse">Indmeldelse</a>' . PHP_EOL;
 	echo '			</li>' . PHP_EOL;
-	echo '			<li><a href="kontakt.php">Kontakt</a>' . PHP_EOL;
+	echo '			<li><a href="/kontakt">Kontakt</a>' . PHP_EOL;
 	echo '			</li>' . PHP_EOL;
-	echo '			<li><a href="nyhedsindex.php">Nyheder</a>' . PHP_EOL;
+	echo '			<li><a href="/nyheder">Nyheder</a>' . PHP_EOL;
 	echo '			</li>' . PHP_EOL;
 	echo '		</ul>' . PHP_EOL;
 }
 
 function show_topbanner() {
-echo '		<span><img alt="Nkclogo" src="images/nkclogo.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Aikido" src="images/aikido.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Fairtex" src="images/fairtex2.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Muay" src="images/muay.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Jj" src="images/jj.png" />' . PHP_EOL;
+echo '		<span><img alt="Nkclogo" src="/images/nkclogo.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Aikido" src="/images/aikido.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Fairtex" src="/images/fairtex2.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Muay" src="/images/muay.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Jj" src="/images/jj.png" />' . PHP_EOL;
 echo '		</span>' . PHP_EOL;
 }
 

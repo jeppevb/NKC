@@ -7,9 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet"
+<link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
-<link rel="icon" type="image/icon" href="favicon.ico" />
+<link rel="icon" type="image/icon" href="/favicon.ico" />
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
 <title><?php echo $myNews['title']; ?></title>
@@ -31,7 +31,7 @@
 			<?php
 			
 			if(isset($_SESSION['SESS_ADMIN_ID'])){
-				echo '<p><a href="/opret_nyheder.php?action=rmnews&id=' . htmlentities($_GET['id']) . '">slet</a>&nbsp<a href="/opret_nyheder.php?action=chnews&id=' . htmlentities($_GET['id']) . '">ret</a></p>';
+				echo '<p><a href="/opret_nyheder/rmnews/' . htmlentities($_GET['id']) . '">slet</a>&nbsp<a href="/opret_nyheder/chnews/' . htmlentities($_GET['id']) . '">ret</a></p>';
 			}
 			?>
 		</div>

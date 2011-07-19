@@ -1,8 +1,8 @@
-ErrorDocument 404 /notfound.html
+
 
 RewriteEngine on
 
-RewriteRule ^nyheder/([0-9]+)(/.*)*$ /nyheder.php?id=$1
+RewriteRule ^nyheder/([0-9]+)(/.*)?$ /nyheder.php?id=$1
 RewriteRule ^nyheder[/]?$ /nyhedsindex.php
 
 RewriteRule ^referater[/]?$ /referater.php
@@ -22,5 +22,16 @@ RewriteRule ^stilart[/]?$ /stilart.php
 RewriteRule ^stilart/([0-9]+)(/.*)?$ /stilart.php?id=$1
 
 RewriteRule ^login[/]?$ /login.php
+
 RewriteRule ^admin[/]?$ /admin.php
+RewriteRule ^admin/mksched$ /admin.php?action=mksched
+RewriteRule ^admin/chsched/([0-9]+)$ /admin.php?action=chsched&schedid=$1
+RewriteRule ^admin/rmsched/([0-9]+)$ /admin.php?action=rmsched&schedid=$1
+RewriteRule ^admin/mkadmin/([A-Za-z0-9]+)/([0-9a-f]{64})$ /admin.php?action=mkadmin&login=$1&passHash=$2
+RewriteRule ^admin/chpass/([0-9]+)/([0-9a-f]{64})$ /admin.php?action=chpass&adminid=$1&passHash=$2
+RewriteRule ^admin/rmadmin/([0-9]+)$ /admin.php?action=rmadmin&adminid=$1
+
 RewriteRule ^opret_nyheder[/]?$ /opret_nyheder.php
+RewriteRule ^opret_nyheder/unrmnews/([0-9]+)[/]?$ /opret_nyheder.php?action=unrmnews&id=$1
+RewriteRule ^opret_nyheder/rmnews/([0-9]+)[/]?$ /opret_nyheder.php?action=rmnews&id=$1
+RewriteRule ^opret_nyheder/chnews/([0-9]+)[/]?$ /opret_nyheder.php?action=chnews&id=$1

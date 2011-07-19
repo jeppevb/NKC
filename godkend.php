@@ -37,20 +37,13 @@ if (isset($_GET['krums'])) {
 
 	//closing the connection
 	fclose($connection);
-	/*
-	 * echo '\'' . $post_string . '\'' . PHP_EOL;
-	 }
 
-	 foreach(getallheaders() as $key=>$value)  {
-	 print $key.': '.$value."<br />";
-	 }
-	 echo file_get_contents("php://input");*/
 	mysql_query('DELETE from waiting_signups where urlhash = \'' . $hash . '\'', $inscon);
 	session_start();
 	$_SESSION['notification'] = 'Din e-mail nu bekræftet. Velkommen i klubben';
 	session_write_close();
-	header('location: notifikation.php');
+	header('location: notifikation');
 }else{
-	header('location: index.php');
+	header('location: /');
 }
 ?>
