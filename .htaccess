@@ -1,0 +1,26 @@
+ErrorDocument 404 /notfound.html
+
+RewriteEngine on
+
+RewriteRule ^nyheder/([0-9]+)(/.*)*$ /nyheder.php?id=$1
+RewriteRule ^nyheder[/]?$ /nyhedsindex.php
+
+RewriteRule ^referater[/]?$ /referater.php
+RewriteRule ^bestyrelse[/]?$ /bestyrelse.php
+RewriteRule ^faciliteter[/]?$ /faciliteter.php
+RewriteRule ^tider[/]?$ /tider.php
+RewriteRule ^kalender[/]?$ /kalender.php
+RewriteRule ^indmeldelse[/]?$ /indmeldelse.php
+RewriteRule ^kontakt[/]?$ /kontakt.php
+RewriteRule ^herfinderduos[/]?$ /herfinderduos.php
+RewriteRule ^omnordjyskkampsportscenter[/]?$ /omnordjyskkampsportscenter.php
+RewriteRule ^historie[/]?$ /historie.php
+RewriteRule ^instruktoerer[/]?$ /instruktoerer.php
+
+RewriteRule ^godkend/([^/]+)/(.*)$ /godkend.php$1
+RewriteRule ^stilart[/]?$ /stilart.php
+RewriteRule ^stilart/([0-9]+)(/.*)?$ /stilart.php?id=$1
+
+RewriteRule ^login[/]?$ /login.php
+RewriteRule ^admin[/]?$ /admin.php
+RewriteRule ^opret_nyheder[/]?$ /opret_nyheder.php
