@@ -109,13 +109,31 @@ for ($i = 0; $i < count($days); $i++) {
 function drawNote($note, $id, $begin, $area, $iteration) {
 	global $image_info;
 	echo '
-<text visibility="visible" opacity="0" x="'. ($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17))
-+((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?14:-14)) . '" y="' .
-			($image_info['y_offset']+43+40*(date('H', strtotime($begin))-$image_info['first_hour'])+10*(floor(date('i', strtotime($begin))/15)))
-			. '" fill="white" stroke="#cb391d" stroke-width="1" font-family="helvetica" z-index="560" font-size="15" ' . 
+<text visibility="visible" opacity="0" fill="none" stroke="white" stroke-width="4" font-family="helvetica" z-index="560" x=0 y=0 font-size="15" ' . 
 			'text-anchor="' . ((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?'start':'end') . '" >' . $note . '
 				<animate begin="info_for_' . $id . '.mouseover" attributeType="CSS" attributeName="opacity" from="0" to="1" dur="300ms" fill="freeze" />
-				<animate begin="info_for_' . $id . '.mouseout" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" />				
+				<animate begin="info_for_' . $id . '.mouseout" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" />
+				<set attributeName="x" to="'. ($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17))
++((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?14:-14)) . '" begin="info_for_' . $id . '.mouseover" fill="freeze" />
+				<set attributeName="y" to="' .	($image_info['y_offset']+43+40*(date('H', strtotime($begin))-$image_info['first_hour'])+10*(floor(date('i', strtotime($begin))/15)))
+			. '" begin="info_for_' . $id . '.mouseover" fill="freeze" />
+				<set attributeName="x" to="0" begin="info_for_' . $id . '.mouseout" fill="freeze" />
+				<set attributeName="y" to="0" begin="info_for_' . $id . '.mouseout" fill="freeze" />
+				
+
+			</text>
+<text visibility="visible" opacity="0" fill="black" font-family="helvetica" z-index="560" x=0 y=0 font-size="15" ' . 
+			'text-anchor="' . ((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?'start':'end') . '" >' . $note . '
+				<animate begin="info_for_' . $id . '.mouseover" attributeType="CSS" attributeName="opacity" from="0" to="1" dur="300ms" fill="freeze" />
+				<animate begin="info_for_' . $id . '.mouseout" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" />
+				<set attributeName="x" to="'. ($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17))
++((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?14:-14)) . '" begin="info_for_' . $id . '.mouseover" fill="freeze" />
+				<set attributeName="y" to="' .	($image_info['y_offset']+43+40*(date('H', strtotime($begin))-$image_info['first_hour'])+10*(floor(date('i', strtotime($begin))/15)))
+			. '" begin="info_for_' . $id . '.mouseover" fill="freeze" />
+				<set attributeName="x" to="0" begin="info_for_' . $id . '.mouseout" fill="freeze" />
+				<set attributeName="y" to="0" begin="info_for_' . $id . '.mouseout" fill="freeze" />
+				
+
 			</text>';
 }
 
