@@ -13,7 +13,7 @@
 <script type="text/javascript">
 
 function supportsSvg() {
-   if (!(document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "1.0")))
+   if (!(document.implementation.hasFeature('org.w3c.dom.svg', '1.0')))
    {
 	   window.location = "/tider/simpel";
    }

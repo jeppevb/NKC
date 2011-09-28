@@ -7,6 +7,7 @@ RewriteRule ^nyheder/([0-9]+)(/.*)*$ /nyheder.php?id=$1 [L]
 RewriteRule ^nyheder$ /nyhedsindex.php [L]
 
 RewriteRule ^referater[/]?$ /referater.php [L]
+RewriteRule ^referater/(.+\.pdf)$ /referater/$1 [L]
 RewriteRule ^bestyrelse[/]?$ /bestyrelse.php [L]
 RewriteRule ^faciliteter[/]?$ /faciliteter.php [L]
 

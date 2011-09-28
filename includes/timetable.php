@@ -81,20 +81,27 @@ echo '
 <path d="M 28 ' . ($image_info['y_offset']+30+(40*($image_info['final_hour']-$image_info['first_hour']))) . ' L ' . $image_info['width'] . ' ' . ($image_info['y_offset']+30+(40*($image_info['final_hour']-$image_info['first_hour']))) . '" stroke="black" stroke-width="1" fill="none" stroke-opacity="1" />';
 
 //activities
+
 for ($i = 0; $i < count($days); $i++) {
 	$result = mysql_query('select begin, end, note, area, style, id, style, style_id from v_schedules where day = \'' . $days[$i] . '\';', $qcon);
 	while ($row = mysql_fetch_array($result)) {
-
 		echo '
 <a xlink:href="/stilart/' . $row['style_id'] . '/' . str_replace(' ', '_', $row['style']) . '">
-<rect x="'. ($image_info['first_day_x_offset'] + (($i * $image_info['day_space'])-10 + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
+<rect z-index="200" x="'. ($image_info['first_day_x_offset'] + (($i * $image_info['day_space'])-10 + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
 		($image_info['y_offset']+30+40*(date('H', strtotime($row['begin']))-$image_info['first_hour'])+10*(floor(date('i', strtotime($row['begin']))/15)))
 		. '" width="20" height="' .
 		(10*(ceil((date('i', strtotime($row['end']))-date('i', strtotime($row['begin']))+
 		(60*(date('H', strtotime($row['end']))-date('H', strtotime($row['begin'])))))/15)))
 		. '" stroke="none" fill-opacity="0.75" fill="' . nameToColor($row['style']) . '" /></a>
 ';
-		//if there is a note on the activity we draw an i and a hidden text to display
+	}
+}
+
+//notes
+for ($i = 0; $i < count($days); $i++) {
+$result = mysql_query('select begin, end, note, area, style, id, style, style_id from v_schedules where day = \'' . $days[$i] . '\';', $qcon);
+	while ($row = mysql_fetch_array($result)) {
+	//if there is a note on the activity we draw an i and a hidden text to display
 		if($row['note'] != null){
 			echo '
 <image id="info_for_' . $row['id'] . '" xlink:href="/images/info2.png" x="'. ($image_info['first_day_x_offset'] - 8  + (($i * $image_info['day_space']) + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
@@ -109,10 +116,10 @@ for ($i = 0; $i < count($days); $i++) {
 function drawNote($note, $id, $begin, $area, $iteration) {
 	global $image_info;
 	echo '
-<text visibility="visible" opacity="0" fill="none" stroke="white" stroke-width="4" font-family="helvetica" z-index="560" x=0 y=0 font-size="15" ' . 
+<text visibility="visible" opacity="0" fill="none" stroke="white" stroke-width="4" font-family="helvetica" z-index="556" x=0 y=0 font-size="15" ' . 
 			'text-anchor="' . ((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?'start':'end') . '" >' . $note . '
-				<animate begin="info_for_' . $id . '.mouseover" attributeType="CSS" attributeName="opacity" from="0" to="1" dur="300ms" fill="freeze" />
-				<animate begin="info_for_' . $id . '.mouseout" attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" />
+				<animate begin="info_for_' . $id . '.mouseover" attributeType="CSS" attributeName="opacity" from="0" to="0.8" dur="300ms" fill="freeze" />
+				<animate begin="info_for_' . $id . '.mouseout" attributeType="CSS" attributeName="opacity" from="0.8" to="0" dur="1s" fill="freeze" />
 				<set attributeName="x" to="'. ($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17))
 +((($image_info['first_day_x_offset'] + (($iteration * $image_info['day_space']) + ($area=='Dojo 1'?-17:17)))<($image_info['width']/2))?14:-14)) . '" begin="info_for_' . $id . '.mouseover" fill="freeze" />
 				<set attributeName="y" to="' .	($image_info['y_offset']+43+40*(date('H', strtotime($begin))-$image_info['first_hour'])+10*(floor(date('i', strtotime($begin))/15)))
