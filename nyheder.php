@@ -13,7 +13,7 @@
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
 <title><?php echo $myNews['title']; ?></title>
-<meta http-equiv="description" content="<?php echo preg_replace('/<[^>]*>/', '', $myNews['meta_desc']); ?>" />
+<meta http-equiv="description" content="<?php echo $myNews['meta_desc']; ?>" />
 </head>
 <body onload="setAd();">
 	<div class="thestyle" id="top">
@@ -27,7 +27,7 @@
 	<div class="thestyle" id="whitebox">
 		<div id="content">
 			<span class="newsheadline"><?php echo $myNews['title'];?></span><span class="newstimestamp"><?php echo $myNews['created']; ?></span>
-			<p><?php echo $myNews['content'];?></p>
+			<p><?php echo myTags($myNews['content']);?></p>
 			<?php
 			
 			if(isset($_SESSION['SESS_ADMIN_ID'])){

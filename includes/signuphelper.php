@@ -1,6 +1,12 @@
 <?php
 include_once 'dbcrudconfig.php';
 
+function include_awareness()
+{
+	echo '<script src="/includes/aware.js" type="text/javascript" > </script>' . PHP_EOL;
+}
+
+
 function send_confirmation_mail($link_hash, $email_addr, $name) {
 	$subject = 'Velkommen til NKC';
 	$message = '

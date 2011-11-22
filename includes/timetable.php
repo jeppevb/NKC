@@ -81,7 +81,6 @@ echo '
 <path d="M 28 ' . ($image_info['y_offset']+30+(40*($image_info['final_hour']-$image_info['first_hour']))) . ' L ' . $image_info['width'] . ' ' . ($image_info['y_offset']+30+(40*($image_info['final_hour']-$image_info['first_hour']))) . '" stroke="black" stroke-width="1" fill="none" stroke-opacity="1" />';
 
 //activities
-
 for ($i = 0; $i < count($days); $i++) {
 	$result = mysql_query('select begin, end, note, area, style, id, style, style_id from v_schedules where day = \'' . $days[$i] . '\';', $qcon);
 	while ($row = mysql_fetch_array($result)) {
@@ -97,9 +96,9 @@ for ($i = 0; $i < count($days); $i++) {
 	}
 }
 
-//notes
+//First we draw the i's
 for ($i = 0; $i < count($days); $i++) {
-$result = mysql_query('select begin, end, note, area, style, id, style, style_id from v_schedules where day = \'' . $days[$i] . '\';', $qcon);
+	$result = mysql_query('select begin, end, note, area, style, id, style, style_id from v_schedules where day = \'' . $days[$i] . '\';', $qcon);
 	while ($row = mysql_fetch_array($result)) {
 	//if there is a note on the activity we draw an i and a hidden text to display
 		if($row['note'] != null){
@@ -107,7 +106,16 @@ $result = mysql_query('select begin, end, note, area, style, id, style, style_id
 <image id="info_for_' . $row['id'] . '" xlink:href="/images/info2.png" x="'. ($image_info['first_day_x_offset'] - 8  + (($i * $image_info['day_space']) + ($row['area']=='Dojo 1'?-17:17))) . '" y="' . 
 			($image_info['y_offset']+43-11+40*(date('H', strtotime($row['begin']))-$image_info['first_hour'])+10*(floor(date('i', strtotime($row['begin']))/15)))
 			. '" width="16px" height="16px" />' . PHP_EOL;
+		}
+	}
+}
 
+//then we draw the actual notes
+for ($i = 0; $i < count($days); $i++) {
+	$result = mysql_query('select begin, end, note, area, style, id, style, style_id from v_schedules where day = \'' . $days[$i] . '\';', $qcon);
+	while ($row = mysql_fetch_array($result)) {
+		//if there is a note on the activity we draw an i and a hidden text to display
+		if($row['note'] != null){
 			drawNote($row['note'], $row['id'], $row['begin'], $row['area'], $i);
 		}
 	}

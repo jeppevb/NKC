@@ -35,6 +35,8 @@ function fetch_style_index() {
 	$index['name'] = $name;
 	$index['meta_desc'] = $meta_desc;
 	$index['description'] = $description;
+	$index['schedule'] = null;
+	$index['id'] = null;
 	
 	return $index;
 }

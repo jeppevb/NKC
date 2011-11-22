@@ -1,5 +1,7 @@
 Options +FollowSymlinks
 RewriteEngine on
+RewriteBase /
+
 Options -Multiviews
 
 RewriteRule ^nyheder/([0-9]+)(/.*)*$ /nyheder.php?id=$1 [L]
@@ -26,6 +28,10 @@ RewriteRule ^godkend/([0-9a-f]+)$ /godkend.php?krums=$1 [L]
 RewriteRule ^stilart[/]?$ /stilart.php [L]
 RewriteRule ^stilart/([0-9]+)[/]?.*$ /stilart.php?id=$1 [L]
 RewriteRule ^login[/]?$ /login.php [L]
+RewriteRule ^logout[/]?$ /logout.php [L]
+RewriteRule ^upload_referat[/]?$ /refupload.php [L]
+RewriteRule ^upload_billede[/]?$ /billedupload.php [L]
+RewriteRule ^upload_billede/([a-z]+)$ /billedupload.php?action=$1 [L]
 RewriteRule ^admin[/]?$ /admin.php [L]
 RewriteRule ^admin/mksched$ /admin.php?action=mksched [L]
 RewriteRule ^admin/chsched/([0-9]+)$ /admin.php?action=chsched&schedid=$1 [L]

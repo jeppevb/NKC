@@ -4,7 +4,7 @@ session_start();
 $login = htmlentities($_POST['login']);
 $password = hash('sha256', $_POST['password']);
 
-$qry='SELECT id FROM admins WHERE login=\'' . $login . '\' AND password=\'' . $password . '\'';
+$qry='SELECT id FROM admins WHERE upper(login)=\'' . strtoupper($login) . '\' AND password=\'' . $password . '\'';
 $result=mysql_query($qry, $qcon);
 
 if(mysql_num_rows($result) == 1) {

@@ -23,7 +23,7 @@ function show_news_headlines($number_of_rows) {
 	while($row = mysql_fetch_array($result))
 	{
 		echo '<span class="newsheadline"><a href="/nyheder/' . $row['id'] . '/'. str_replace(' ', '_', $row['title']) . '">' . $row['title'] . '</a></span>&nbsp;<span class="newstimestamp">' . strftime('%H:%M - %#d. %B %Y',$row['created']) . '</span>' . PHP_EOL;
-		echo '<p class="newsdesc">' . $row['meta_desc'] . '</p>' . PHP_EOL;
+		echo '<p class="newsdesc">' . myTags($row['meta_desc']) . '</p>' . PHP_EOL;
 		if(isset($_SESSION['SESS_ADMIN_ID'])){
 			echo '<p><a href="/opret_nyheder/rmnews/' . $row['id'] . '">slet</a>&nbsp<a href="/opret_nyheder/chnews/' . $row['id'] . '">ret</a></p>';
 		}
@@ -31,4 +31,20 @@ function show_news_headlines($number_of_rows) {
 	}
 }
 
+function myTags($param) {
+
+	$str = preg_replace('/([^\s]+\.(png|jpg|gif))(\s|$)/', '<img¤src="\1"¤/>\3', $param);
+
+	$str = preg_replace('/(http[^\s]+(?<!(png|jpg|gif)))\s([^\s$]+)(\s|$)/', '<a href="\1">\3</a>\4', $str);
+
+	$str = preg_replace('/' . PHP_EOL . PHP_EOL . '/', '</p><p>', $str);
+
+	$str = preg_replace('/\n/', '<br/>', $str);
+
+	$str = str_replace('¤',	' ', $str);
+
+	$str = str_replace('</p>', '</p>'.PHP_EOL, $str);
+
+	return $str;
+}
 ?>

@@ -11,7 +11,7 @@
 <?php analytics_js(); ?>
 <title>Login som administrator</title>
 <meta http-equiv="description"
-	content="Her finder man referaterne fra vores møder Nordjysk Kampsportscenter." />
+	content="Login til Nordjysk Kampsportscenter." />
 </head>
 <body onload="setAd();">
 	<div class="thestyle" id="top">
@@ -49,4 +49,3 @@
 	<div id="footer" class="thestyle"></div>
 </body>
 </html>
-

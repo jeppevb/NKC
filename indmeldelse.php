@@ -18,6 +18,8 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 
 <?php show_validate_js(); ?>
 
+<?php include_awareness(); ?>
+
 <?php ads_js_include(); ?>
 
 <?php analytics_js(); ?>
@@ -26,7 +28,7 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 <meta http-equiv="description"
 	content="" />
 </head>
-<body onload="setAd();">
+<body onload="startAwareness(); setAd();">
 	<div class="thestyle" id="top">
 	<?php show_topbanner(); ?>
 	</div>
@@ -38,9 +40,9 @@ if (isset($_POST['MemberFirstname']) && isset($_POST['MemberLastname']) && isset
 	<div class="thestyle" id="whitebox">
 		<div id="content">
 			<h1>Indmeldelsesformular</h1>
-			<p>Jeg ønsker medlemskab af Nordjysk Kampsportscenter. Jeg har læst klubbens vedtægter og ordensregler, og forpligter mig til at overholde disse. Jeg er indforstået med, at træning er under eget ansvar, og derfor kan jeg ikke gøre krav overfor klubben eller trænerne, ved eventuelle skader opstået under træningen.
+			<p>Jeg ønsker medlemskab af Nordjysk Kampsportscenter. Jeg har læst klubbens vedtægter og ordensregler, og forpligter mig til at overholde disse. Jeg er indforstået med, at træning er under eget ansvar, og derfor kan jeg ikke gøre krav overfor klubben eller trænerne, ved eventuelle skader opstået under træningen. Jeg forstår at jeg vil modtage en E-mail og at min indmeldelse kun er gyldig når jeg har bekræftet at min E-mail adresse er gyldig. 
 			</p>
-			<p>Ved udmeldelse skal der rettes skriftlig henvendelse til klubbens kasserer, enten via mail til kasserer@nordjyskkampsport.dk eller ved at lægge skrivelsen i bestyrelsesskabet i klublokalet. Vær opmærksom på, at vi af og til bruger både fotografering og videooptagelser for at promovere og dokumentere klubben. Hvis du foretrækker ikke at blive fotograferet og filmet, er det vigtigt, du meddeler din instruktør om dette. Vær også opmærksom på at du skal betale kontingentet via PBS. Spørg din instruktør eller kassereren hvis du er i tvivl om hvordan.</p>
+			<p><span id="udmeldelse">Ved udmeldelse skal der rettes skriftlig henvendelse til klubbens kasserer, enten via mail til kasserer@nordjyskkampsport.dk eller ved at lægge skrivelsen i bestyrelsesskabet i klublokalet.</span> Vær opmærksom på, at vi af og til bruger både fotografering og videooptagelser for at promovere og dokumentere klubben. Hvis du foretrækker ikke at blive fotograferet og filmet, er det vigtigt, du meddeler din instruktør om dette. Vær også opmærksom på at du skal betale kontingentet via PBS. Spørg din instruktør eller kassereren hvis du er i tvivl om hvordan.</p>
 			<p>Deltager du på børnehold skal vi have underskrift fra dine forældre/værge. Der er <a href="/indmeldelse.pdf">indmeldelsesblanketter</a> i klubben men du kan også hente en <a href="indmeldelse.pdf">her</a> og printe den ud.</p>
 			<hr/>
 			<p>Jeg accepterer NKCs <a href="/NKCStatutes.pdf">vedtægter</a> og forstår at de beskriver de regler og rettigheder der gælder mig som medlem af klubben. <input type="checkbox" id="accept_bylaws" /></p>

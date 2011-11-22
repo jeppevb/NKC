@@ -184,7 +184,11 @@ h2
 	z-index:1;
 	background-color: black;
 	text-align: center;
-	border:0;
+}
+
+#footer img
+{
+	border-style:none;
 }
 
 /* HER BEGYNDER DROP DOWN DELEN */

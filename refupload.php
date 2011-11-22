@@ -76,7 +76,7 @@ function validateUpl()
 	}
 ?>
 		
-			<form onsubmit="validateUpl();" action="refupload.php" method="post" enctype="multipart/form-data" >
+			<form onsubmit="return validateUpl();" action="/upload_referat" method="post" enctype="multipart/form-data" >
 				<label for="type">Mødetype:</label>
 				<input type="radio" name="type" value="bestyrelse" checked="checked" />bestyrelse<br />
 				<input type="radio" name="type" value="instruktør" />instruktør<br />

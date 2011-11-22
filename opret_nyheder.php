@@ -3,21 +3,17 @@
 <?php include_once 'includes/dbqueryconfig.php'; ?>
 <?php
 
-function myTags($param) {
+$danCharacters = array('æ' => '&aelig;','ø' => '&oslash;','å' => '&aring;','Æ' => '&AElig;','Ø' => '&Oslash;','Å' => '&Aring;');
+$danReverse = array_flip($danCharacters);
 
-	$str = preg_replace('/([^\s]+\.(png|jpg|gif))(\s|$)/', '<img¤src="\1"¤/>\3', $param);
-
-	$str = preg_replace('/(http[^\s]+(?<!(png|jpg|gif)))\s([^\s$]+)(\s|$)/', '<a href="\1">\3</a>\4', $str);
-
-	$str = preg_replace('/' . PHP_EOL . PHP_EOL . '/', '</p><p>', $str);
-
-	$str = preg_replace('/\n/', '<br/>', $str);
-
-	$str = str_replace('¤',	' ', $str);
-
-	$str = str_replace('</p>', '</p>'.PHP_EOL, $str);
+function escapeString($param, $characters) {
+	$str = $param;
+	foreach ($characters as $search => $replace){
+		$str = str_replace($search, $replace, $str);
+	}
 
 	return $str;
+
 }
 
 $news = array();
@@ -26,8 +22,8 @@ if(!isset($_GET['action'])){
 	if (isset($_POST['title']) && isset($_POST['newscontent']) && isset($_POST['meta_desc'])){
 
 		$title = htmlentities($_POST['title'],ENT_QUOTES, 'UTF-8');
-		$content = myTags(htmlentities($_POST['newscontent'],ENT_QUOTES, 'UTF-8'));
-		$meta_desc = myTags(htmlentities($_POST['meta_desc'],ENT_QUOTES, 'UTF-8'));
+		$content = htmlentities($_POST['newscontent'],ENT_QUOTES, 'UTF-8');
+		$meta_desc = htmlentities($_POST['meta_desc'],ENT_QUOTES, 'UTF-8');
 		$admin_id = $_SESSION['SESS_ADMIN_ID'];
 
 		mysql_query('begin');
@@ -100,6 +96,8 @@ if(!isset($_GET['action'])){
 	</div>
 	<div class="thestyle" id="whitebox">
 		<div id="content">
+		<a href="/logout">Log ud</a>
+		
 			<form id="" method="post" action="/opret_nyheder<?php echo (isset($_GET['action'])&&$_GET['action'] == 'chnews')?'/chnews/' . $_GET['id']:'';?>">
 				<table>
 					<tr>
@@ -109,7 +107,7 @@ if(!isset($_GET['action'])){
 								som står i toppen af browseren og er linket på googles
 								søgeresultat.</div></td>
 						<td class="input"><input style="width: 88%;" name="title"
-							id="title" type="text" value="<?php echo htmlentities($news['title']); ?>"/></td>
+							id="title" type="text" value="<?php echo $news['title']; ?>"/></td>
 
 					</tr>
 					<tr>
@@ -119,7 +117,7 @@ if(!isset($_GET['action'])){
 								beskrivelse bruges på nyheds indexsiden, forsiden og står under
 								overskriften på googles søgeresultat.</div></td>
 						<td class="input"><input style="width: 88%;" name="meta_desc"
-							id="meta_desc" type="text" value="<?php echo htmlentities($news['meta_desc']);?>"/></td>
+							id="meta_desc" type="text" value="<?php echo escapeString($news['meta_desc'], $danReverse);?>"/></td>
 
 					</tr>
 					<tr>
@@ -137,7 +135,7 @@ if(!isset($_GET['action'])){
 								eller images/fairtex.png
 							</div></td>
 						<td class="input"><textarea style="width: 88%;" name="newscontent"
-								id="newscontent" rows="10"><?php echo htmlentities($news['content']); ?></textarea></td>
+								id="newscontent" rows="10"><?php echo escapeString($news['content'], $danReverse); ?></textarea></td>
 
 					</tr>
 					<tr>

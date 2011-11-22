@@ -3,6 +3,10 @@
 <?php require_once 'includes/dbqueryconfig.php'; ?>
 <?php include_once 'includes/header.php';?>
 <?php
+
+$danCharacters = array('æ' => '&aelig;','ø' => '&oslash;','å' => '&aring;','Æ' => '&AElig;','Ø' => '&Oslash;','Å' => '&Aring;');
+$danReverse = array_flip($danCharacters);
+
 if(isset($_GET['action'])){
 	switch ($_GET['action']) {
 		case 'rmadmin':
@@ -29,7 +33,7 @@ if(isset($_GET['action'])){
 			break;
 		case 'chsched':
 			if(isset($_GET['schedid']) && isset($_POST['begin']) && isset($_POST['end']) && isset($_POST['note']) && isset($_POST['day']) && isset($_POST['style']) && isset($_POST['area'])){
-				mysql_query('update schedules set begin = \'' . htmlentities($_POST['begin']) . '\', end = \''  . htmlentities($_POST['end']) . '\', note =\'' . fixDanString($_POST['note']) . '\', day_id =\'' . htmlentities($_POST['day']) . '\', style_id = \'' . htmlentities($_POST['style']) . '\', area_id = ' . htmlentities($_POST['area']) . ' where id =' . htmlentities($_GET['schedid']), $inscon);
+				mysql_query('update schedules set begin = \'' . htmlentities($_POST['begin']) . '\', end = \''  . htmlentities($_POST['end']) . '\', note =\'' . escapeString($_POST['note'], $danCharacters) . '\', day_id =\'' . htmlentities($_POST['day']) . '\', style_id = \'' . htmlentities($_POST['style']) . '\', area_id = ' . htmlentities($_POST['area']) . ' where id =' . htmlentities($_GET['schedid']), $inscon);
 			}
 			break;
 		case 'mksched':
@@ -45,17 +49,16 @@ if(isset($_GET['action'])){
 	}
 }
 
-function fixDanString($param) {
+
+
+function escapeString($param, $characters) {
 	$str = $param;
-	$str = str_replace('æ', '&aelig;', $str);
-	$str = str_replace('ø', '&oslash;', $str);
-	$str = str_replace('å', '&aring;', $str);
-	$str = str_replace('Æ', '&AElig;', $str);
-	$str = str_replace('Ø', '&Oslash;', $str);
-	$str = str_replace('Å', '&Aring;', $str);
-	
+	foreach ($characters as $search => $replace){
+		$str = str_replace($search, $replace, $str);
+	}
+
 	return $str;
-	
+
 }
 
 ?>
@@ -93,32 +96,18 @@ function changePass(adminid) {
 </head>
 <body>
 	<div class="thestyle" id="top">
-
-
-
-
-
-
-
-
 	<?php show_topbanner(); ?>
 	</div>
 	<div id="menu" class="thestyle">
 		<!-- Her begynder menuen  -->
-		
-		
-		
-		
-		
-		
-		
-		
-	<?php show_menu(); ?>
+		<?php show_menu(); ?>
 		<!-- Her ender menuen  -->
 	</div>
 	<div class="thestyle" id="whitebox">
 		<div id="content">
+		<a href="/logout">Log ud</a>
 		<h2>Tider</h2>
+			
 			<?php 
 			
 			$result = mysql_query('select * from days order by id asc', $qcon);
@@ -151,7 +140,7 @@ function changePass(adminid) {
 				echo '		</select>
 		<input style="width:3em;" type="text" name="begin" value="' . $row['begin'] . '"/>
 		<span>&nbsp;til&nbsp;</span><input style="width:3em;" type="text" name="end" value="' . $row['end'] . '"/>
-		<span>note:</span><input type="text" name="note" style="width: 22em;" value="' . $row['note'] . '"/>
+		<span>note:</span><input type="text" name="note" style="width: 22em;" value="' . escapeString($row['note'], $danReverse) . '"/>
 		
 		<select name="style">' . PHP_EOL;
 				foreach ($styles as $style) {
@@ -199,19 +188,13 @@ function changePass(adminid) {
 			</form>
 							' . PHP_EOL;
 			?>
+			<h2>Referater</h2>
+			<a href="/upload_referat">Upload referat</a><br />
 			<h2>Nyheder</h2>
 			<a href="/opret_nyheder">Opret nyhed</a><br />
 			<p>
-				<em class="legend">slettede:</em><br />
-				
-				
-				
-				
-				
-				
-				
-				
-	
+				<em class="legend">Slettede:</em><br />
+
 			<?php 
 			$deleted_news = mysql_query('select * from news where deleted order by created desc', $qcon);
 			while ($row = mysql_fetch_array($deleted_news)) {
@@ -221,14 +204,6 @@ function changePass(adminid) {
 			?>
 			</p>
 			<h2>Administratorer</h2>
-			
-			
-			
-			
-			
-			
-			
-			
 
 			<?php 
 			$admin_result = mysql_query('select login, id from admins', $qcon);
@@ -238,7 +213,6 @@ function changePass(adminid) {
 			
 			?>
 			<input id="newLogin" type="text" /><input id="newPass" type="password"/><a href="javascript:createAdmin()">opret administrator</a>
-			
 		</div>
 	</div>
 	<div id="footer" class="thestyle"></div>
