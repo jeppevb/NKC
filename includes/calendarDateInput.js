@@ -151,11 +151,11 @@ function BuildCalendarDays() {
          Day = (j * 7) + (i - this.displayed.firstDay);
          if ((Day >= 1) && (Day <= this.displayed.dayCount)) {
             if ((this.displayed.yearValue == this.picked.yearValue) && (this.displayed.monthIndex == this.picked.monthIndex) && (Day == this.picked.day)) {
-               TextStyle = 'color:white;font-weight:bold;';a
+               TextStyle = 'color:white;font-weight:bold;'
                BackColor = DayBGColor;
             }
             else {
-               TextStyle = 'color:black;';
+               TextStyle = 'color:black;'
                BackColor = CalBGColor;
             }
             if ((this.displayed.yearValue == Today.getFullYear()) && (this.displayed.monthIndex == Today.getMonth()) && (Day == Today.getDate())) TextStyle += 'border:1px solid darkred;padding:0px;';

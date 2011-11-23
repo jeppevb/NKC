@@ -9,7 +9,9 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
+<link rel="alternate" type="application/atom+xml" title="Nordjysk Kampsportscenters Atom Feed" href="/feed" />
 <link rel="icon" type="image/icon" href="/favicon.ico" />
+
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
 <title>Nyheder fra Nordjysk Kampsportscenter</title>

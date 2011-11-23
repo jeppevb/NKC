@@ -12,6 +12,8 @@ RewriteRule ^referater[/]?$ /referater.php [L]
 RewriteRule ^bestyrelse[/]?$ /bestyrelse.php [L]
 RewriteRule ^faciliteter[/]?$ /faciliteter.php [L]
 
+RewriteRule ^feed[/]?$ /feed.php [L]
+
 RewriteRule ^tider[/]?$ /tider.php [L]
 RewriteRule ^tider/simpel[/]?$ /tider.php?style=noSVG [L]
 

@@ -14,11 +14,7 @@
 <title>Upload Referat - Nordjysk Kampsportscenter</title>
 
 <script type="text/javascript" src="includes/calendarDateInput.js">
-/***********************************************
-* Jason's Date Input Calendar- By Jason Moon http://calendar.moonscript.com/dateinput.cfm
-* Script featured on and available at http://www.dynamicdrive.com
-* Keep this notice intact for use.
-***********************************************/
+
 </script>
 
 <script type="text/javascript">
@@ -38,7 +34,6 @@ function validateUpl()
 }
 </script>
 
-
 </head>
 <body>
 	<div class="thestyle" id="top">
@@ -55,6 +50,11 @@ function validateUpl()
 		
 <?php
 	if (isset($_FILES["file"]) && isset($_POST["date"]) && isset($_POST["type"])) {
+		if ($_POST["type"] == 'andet')
+			$refname = $_POST["date"] . "_" . $_POST["andet"] . ".pdf";
+		else
+			$refname = $_POST["date"] . "_" . $_POST["type"] . ".pdf";
+		
 		if ($_FILES["file"]["error"] > 0)
 		{
 			echo "Error: " . $_FILES["file"]["error"] . "<br />";
@@ -62,37 +62,33 @@ function validateUpl()
 		else
 		{
 			$_POST["date"] = substr($_POST["date"], 2);
-			if (file_exists("referater/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf"))
+			if (file_exists("referater/" . $refname))
 			{
-				echo "referater/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf" . " findes i forvejen.";
+				echo "referater/" . $refname . " findes i forvejen.";
 			}
 			else
 			{
-				copy($_FILES["file"]["tmp_name"], "referater/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf");
-				echo "Referat uploadet: " .  $_POST["date"] . "_" . $_POST["type"] . ".pdf";
+				copy($_FILES["file"]["tmp_name"], "referater/" . $refname);
+				echo "Referat uploadet: " .  $refname;
 			}
 		}
 		echo "<hr />";
 	}
 ?>
-		
-			<form onsubmit="return validateUpl();" action="/upload_referat" method="post" enctype="multipart/form-data" >
-				<label for="type">Mødetype:</label>
+			<form onsubmit="return validateUpl();" action="/upload_referat" method="post" enctype="multipart/form-data">
+				<label for="type">Mødetype:</label><span class="legend"><img src="/billeder/info.gif" />
+				<div class="legend">Vælg en mødetype. Vælger du den nederste skal du give et alternativ.</div></span><br />
 				<input type="radio" name="type" value="bestyrelse" checked="checked" />bestyrelse<br />
 				<input type="radio" name="type" value="instruktør" />instruktør<br />
 				<input type="radio" name="type" value="generalforsamling" />generalforsamling<br />
 				<input type="radio" id="andetradio" name="type" value="andet" /><input type="text" id="andet" />
 				<br />
-				<label for="date">møde dato:&nbsp;</label><script>DateInput('date', true, 'YYYYMMDD')</script>
-				
-				
+				<label for="date">dato:&nbsp;</label>
+				<script>DateInput('date', true, 'YYYYMMDD');</script><br />
 				<label for="file">referat:&nbsp;</label>
 				<input type="file" name="file" id="file" accept="application/pdf" /> 
-				<br />
 				<input type="submit" name="submit" value="Upload Referat" />
-				
 			</form>
-			
 		</div>
 	</div>
 	<div id="footer" class="thestyle"></div>

@@ -107,14 +107,6 @@ if (isset($_GET['action'])) {
 <link rel="icon" type="image/icon" href="/favicon.ico" />
 <title>Upload Billeder - Nordjysk Kampsportscenter</title>
 
-<script type="text/javascript" src="includes/calendarDateInput.js">
-/***********************************************
-* Jason's Date Input Calendar- By Jason Moon http://calendar.moonscript.com/dateinput.cfm
-* Script featured on and available at http://www.dynamicdrive.com
-* Keep this notice intact for use.
-***********************************************/
-</script>
-
 <script type="text/javascript">
 function validateUpl()
 {
@@ -161,7 +153,9 @@ function addLine()
 			<a href="/logout">Log ud</a><br />
 			<form onsubmit="return validateGal();" action="/upload_billede/gallery" method="post" >
 				<table>
-				<tr><th>mappenavn</th><th>gallerinavn</th></tr>
+				<tr><th>mappenavn<span class="legend"><img src="/billeder/info.gif" />
+				<div class="legend">Skal være et navn af tegnene a til z og 0 til 9 uden mellemrum.</div></span></th><th>gallerinavn<span class="legend"><img src="/billeder/info.gif" />
+				<div class="legend">Kan være et navn af tegnene a til å og 0 til 9 med mellemrum.</div></span></th></tr>
 				<tr><td><input type="text" id="foldername" name="foldername" /></td><td><input type="text" id="galleryname" name="galleryname"/></td></tr>
 				</table>
 				<input type="submit" name="submit" value="Opret galleri" />
@@ -174,12 +168,15 @@ function addLine()
 			<form onsubmit="return validateUpl();" action="/upload_billede/upload" method="post" enctype="multipart/form-data" >
 				<select name="gallery">
 				<?php printGalleries(); ?>	
-				</select>
+				</select><span class="legend"><img src="/billeder/info.gif" />
+				<div class="legend">Det galleri du vil uploade nedenstående billede(r) til.</div></span>
 				<br /><br />
-				<input type="button" value="Flere linier?" onclick="addLine();" />
+				<input type="button" value="Flere linier?" onclick="addLine();" /><span class="legend"><img src="/billeder/info.gif" />
+				<div class="legend">Tilføj inputfelter herunder så du kan uploade flere billeder ad gangen.</div></span>
 				<table>
 				<tbody id="filestbl">
-				<tr><th>billede</th><th>omdøb til</th></tr>
+				<tr><th>billede</th><th>omdøb til<span class="legend"><img src="/billeder/info.gif" />
+				<div class="legend">Hvis dette felt er sat bliver billedet omdøbt til dette navn. Undlad extension. Dvs. du skal ikke skrive mit_nye_billednavn.jpg, men bare mit_nye_billednavn</div></span></th></tr>
 				<tr><td><input type="file" name="file[]" accept="image/*" /></td><td><input type="text" name="newname[]" /></td></tr>
 				</tbody>
 				</table>
