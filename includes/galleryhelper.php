@@ -18,7 +18,7 @@ function fetch_galleries(){
 
 function gallery($gal_id){
 	global $qcon;
-	$result = mysql_query('select images.id as img_id, images.filename as img_filename, foldername from galleries inner join images on images.gallery_id = galleries.id where galleries.id = ' . $gal_id . ' order by images.created asc', $qcon);
+	$result = mysql_query('select images.id as img_id, images.filename as img_filename, foldername from galleries inner join images on images.gallery_id = galleries.id where galleries.id = ' . $gal_id . ' order by images.created desc', $qcon);
 	while ($row = mysql_fetch_array($result)){
 		echo '<a href="/billeder/' . $row['foldername'] . "/" . $row['img_filename'] . '"><img src="/billeder/' . $row['foldername'] . "/frontnails/" . $row['img_filename'] . '" /></a>' . PHP_EOL;
 	}

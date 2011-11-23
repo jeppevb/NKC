@@ -166,6 +166,9 @@ function addLine()
 				</table>
 				<input type="submit" name="submit" value="Opret galleri" />
 			</form>
+			
+			<br />
+			<hr />
 			<br />
 			
 			<form onsubmit="return validateUpl();" action="/upload_billede/upload" method="post" enctype="multipart/form-data" >

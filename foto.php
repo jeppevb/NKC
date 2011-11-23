@@ -10,7 +10,7 @@
 <link rel="icon" type="image/icon" href="/favicon.ico" />
 <?php ads_js_include(); ?>
 <?php analytics_js(); ?>
-<title>Nyheder fra Nordjysk Kampsportscenter</title>
+<title>Billeder fra Nordjysk Kampsportscenter</title>
 <meta http-equiv="description" content="Her kan du se billeder fra Nordjysk Kampsportscenter." />
 </head>
 <body onload="setAd();">
