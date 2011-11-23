@@ -1,6 +1,8 @@
 <?php include_once 'includes/header.php';?>
 <?php include_once 'includes/ads.php';?>
 <?php include_once 'includes/newshelper.php';?>
+<?php include_once 'includes/dbqueryconfig.php';?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,11 +29,12 @@
 		<h1>Velkommen til Nordjysk Kampsportscenter</h1>
 		<table>
 		<tr><td style="width:20em; vertical-align: top;">
-		<img src="/billeder/jjkids.png" style="width: 17em;" alt="Børn træner bevægelse på gulvet"/><br />
-		<img src="/billeder/jeppeguillo.png" style="width: 17em;" alt="Jeppe strangulerer sin modstander med guillotine" />
-		<img src="/billeder/thomasbar.png" style="width: 17em;" alt="Thomas laver en armbar på sin modstander"/><br />
-		<img src="/billeder/pallfightBW.png" style="width: 17em;" alt="Páll i ringen til fightergalla"/><br />	
-		<img src="/billeder/larsgnp.png" style="width: 17em;" alt="Lars slår sin modstander fra mount"/><br />
+		<?php 
+		$result = mysql_query('select galleries.foldername as foldername, images.filename as filename from galleries inner join images on images.gallery_id = galleries.id order by rand() limit 5', $qcon);
+		while ($row = mysql_fetch_array($result)) {
+			echo '<a href="/billeder/' . $row['foldername'] . '/' . $row['filename'] . '"><img src="/billeder/' . $row['foldername'] . '/frontnails/' . $row['filename'] . '" /></a><br />';
+		}
+		?>
 		</td><td style="vertical-align: top;"><?php show_news_headlines(6); ?><a href="/nyheder" style="font-size: x-small;">flere...</a></td></tr>
 		</table>
 			
