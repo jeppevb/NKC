@@ -12,38 +12,38 @@ if(isset($_GET['action'])){
 		case 'rmadmin':
 			$myAdmins = mysql_query('select * from admins', $qcon);
 			if(mysql_num_rows($myAdmins) > 1 && isset($_GET['adminid'])){
-				mysql_query('delete from admins where id =' . htmlentities($_GET['adminid']), $inscon);
+				mysql_query('delete from admins where id =' . mysql_real_escape_string($_GET['adminid']), $inscon);
 			}
 			header('Location: /admin');
 			exit();
 			break;
 		case 'mkadmin':
 			if(isset($_GET['login']) && isset($_GET['passHash'])){
-				mysql_query('insert into admins (login, password) values (\'' . htmlentities($_GET['login']) . '\', \'' . htmlentities($_GET['passHash']). '\');', $inscon);
+				mysql_query('insert into admins (login, password) values (\'' . mysql_real_escape_string($_GET['login']) . '\', \'' . mysql_real_escape_string($_GET['passHash']). '\');', $inscon);
 			}
 			header('Location: /admin');
 			exit();
 			break;
 		case 'chpass':
 			if(isset($_GET['adminid']) && isset($_GET['passHash'])){
-				mysql_query('update admins set password = \'' . htmlentities($_GET['passHash']) . '\' where id =' . htmlentities($_GET['adminid']), $inscon);
+				mysql_query('update admins set password = \'' . mysql_real_escape_string($_GET['passHash']) . '\' where id =' . mysql_real_escape_string($_GET['adminid']), $inscon);
 			}
 			header('Location: /admin');
 			exit();
 			break;
 		case 'chsched':
 			if(isset($_GET['schedid']) && isset($_POST['begin']) && isset($_POST['end']) && isset($_POST['note']) && isset($_POST['day']) && isset($_POST['style']) && isset($_POST['area'])){
-				mysql_query('update schedules set begin = \'' . htmlentities($_POST['begin']) . '\', end = \''  . htmlentities($_POST['end']) . '\', note =\'' . escapeString($_POST['note'], $danCharacters) . '\', day_id =\'' . htmlentities($_POST['day']) . '\', style_id = \'' . htmlentities($_POST['style']) . '\', area_id = ' . htmlentities($_POST['area']) . ' where id =' . htmlentities($_GET['schedid']), $inscon);
+				mysql_query('update schedules set begin = \'' . mysql_real_escape_string($_POST['begin']) . '\', end = \''  . mysql_real_escape_string($_POST['end']) . '\', note =\'' . escapeString($_POST['note'], $danCharacters) . '\', day_id =\'' . mysql_real_escape_string($_POST['day']) . '\', style_id = \'' . mysql_real_escape_string($_POST['style']) . '\', area_id = ' . mysql_real_escape_string($_POST['area']) . ' where id =' . mysql_real_escape_string($_GET['schedid']), $inscon);
 			}
 			break;
 		case 'mksched':
 			if(isset($_POST['begin']) && isset($_POST['end']) && isset($_POST['note']) && isset($_POST['day']) && isset($_POST['style']) && isset($_POST['area'])){
-				mysql_query('insert into schedules (begin, end, note, day_id, style_id, area_id) values (\'' . htmlentities($_POST['begin']) . '\', \''  . htmlentities($_POST['end']) . '\', \'' . htmlentities($_POST['note']) . '\', \'' . htmlentities($_POST['day']) . '\', \'' . htmlentities($_POST['style']) . '\', \'' . htmlentities($_POST['area']) . '\')', $inscon);
+				mysql_query('insert into schedules (begin, end, note, day_id, style_id, area_id) values (\'' . mysql_real_escape_string($_POST['begin']) . '\', \''  . mysql_real_escape_string($_POST['end']) . '\', \'' . mysql_real_escape_string($_POST['note']) . '\', \'' . mysql_real_escape_string($_POST['day']) . '\', \'' . mysql_real_escape_string($_POST['style']) . '\', \'' . mysql_real_escape_string($_POST['area']) . '\')', $inscon);
 			}
 			break;
 		case 'rmsched':
 			if(isset($_GET['schedid'])){
-				mysql_query('delete from schedules where id =' . htmlentities($_GET['schedid']), $inscon);
+				mysql_query('delete from schedules where id =' . mysql_real_escape_string($_GET['schedid']), $inscon);
 			}
 			break;
 	}
@@ -70,7 +70,7 @@ function escapeString($param, $characters) {
 <link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
 <link rel="icon" type="image/icon" href="/favicon.ico" />
-<title>administrer Nordjysk Kampsportscenter</title>
+<title>Administrer Nordjysk Kampsportscenter</title>
 
 <script src="includes/sha256.js" type="text/javascript"></script>
 
@@ -190,6 +190,8 @@ function changePass(adminid) {
 			?>
 			<h2>Referater</h2>
 			<a href="/upload_referat">Upload referat</a><br />
+			<h2>Billeder</h2>
+			<a href="/upload_billede">Upload billeder</a><br />
 			<h2>Nyheder</h2>
 			<a href="/opret_nyheder">Opret nyhed</a><br />
 			<p>

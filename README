@@ -2,11 +2,7 @@ This is the source code for the homepage of Nordjysk Kampsportscenter.
 
 TODO:
 Add sql for seed data
-tider
-super admin
-refit styles to use the schema
 resize pictures
 gallery
 upload
 embed media in news
-cache control

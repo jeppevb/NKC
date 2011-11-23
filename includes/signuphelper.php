@@ -26,7 +26,7 @@ function send_confirmation_mail($link_hash, $email_addr, $name) {
 			</style>
 			</head>
 			<body>
-				<div style="text-align: center;"><img src="http://www.nordjyskkampsport.dk/images/nkclogo.png" width="150px" /></div>
+				<div style="text-align: center;"><img src="http://www.nordjyskkampsport.dk/billeder/nkclogo.png" width="150px" /></div>
 				<div>
 					<p>Hej ' . $name . ',</p>
 					<p>
@@ -58,26 +58,26 @@ $headers .= 'From: Nordjysk Kampsportscenter <noreply@nordjyskkampsport.dk>' . P
 function save_and_request_confirmation($thePostArray){
 	global $inscon;
 	
-	$thePostArray['MemberFirstname'] = htmlentities($thePostArray['MemberFirstname'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberMiddlename'] = htmlentities($thePostArray['MemberMiddlename'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberLastname'] = htmlentities($thePostArray['MemberLastname'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberAdress'] = htmlentities($thePostArray['MemberAdress'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberZip'] = htmlentities($thePostArray['MemberZip'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberEmail'] = htmlentities($thePostArray['MemberEmail'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberPhone'] = htmlentities($thePostArray['MemberPhone'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberMobile'] = htmlentities($thePostArray['MemberMobile'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberSex'] = htmlentities($thePostArray['MemberSex'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberBirth'] = htmlentities($thePostArray['MemberBirth'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberComment'] = htmlentities($thePostArray['MemberComment'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberEmailNotice'] = htmlentities($thePostArray['MemberEmailNotice'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['MemberSMSNotice'] = htmlentities($thePostArray['MemberSMSNotice'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['ACCEPTURL'] = htmlentities($thePostArray['ACCEPTURL'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['DECLINEURL'] = htmlentities($thePostArray['DECLINEURL'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['FOADACC'] = htmlentities($thePostArray['FOADACC'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['FOADCOS'] = htmlentities($thePostArray['FOADCOS'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['FOADSEC'] = htmlentities($thePostArray['FOADSEC'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['FOADNOTSEC'] = htmlentities($thePostArray['FOADNOTSEC'],ENT_QUOTES, 'UTF-8');
-	$thePostArray['FOADELM'] = htmlentities($thePostArray['FOADELM'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberFirstname'] = mysql_real_escape_string($thePostArray['MemberFirstname'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberMiddlename'] = mysql_real_escape_string($thePostArray['MemberMiddlename'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberLastname'] = mysql_real_escape_string($thePostArray['MemberLastname'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberAdress'] = mysql_real_escape_string($thePostArray['MemberAdress'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberZip'] = mysql_real_escape_string($thePostArray['MemberZip'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberEmail'] = mysql_real_escape_string($thePostArray['MemberEmail'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberPhone'] = mysql_real_escape_string($thePostArray['MemberPhone'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberMobile'] = mysql_real_escape_string($thePostArray['MemberMobile'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberSex'] = mysql_real_escape_string($thePostArray['MemberSex'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberBirth'] = mysql_real_escape_string($thePostArray['MemberBirth'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberComment'] = mysql_real_escape_string($thePostArray['MemberComment'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberEmailNotice'] = mysql_real_escape_string($thePostArray['MemberEmailNotice'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['MemberSMSNotice'] = mysql_real_escape_string($thePostArray['MemberSMSNotice'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['ACCEPTURL'] = mysql_real_escape_string($thePostArray['ACCEPTURL'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['DECLINEURL'] = mysql_real_escape_string($thePostArray['DECLINEURL'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['FOADACC'] = mysql_real_escape_string($thePostArray['FOADACC'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['FOADCOS'] = mysql_real_escape_string($thePostArray['FOADCOS'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['FOADSEC'] = mysql_real_escape_string($thePostArray['FOADSEC'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['FOADNOTSEC'] = mysql_real_escape_string($thePostArray['FOADNOTSEC'],ENT_QUOTES, 'UTF-8');
+	$thePostArray['FOADELM'] = mysql_real_escape_string($thePostArray['FOADELM'],ENT_QUOTES, 'UTF-8');
 	
 	mysql_query('begin');
 	mysql_query('INSERT INTO waiting_signups(firstname, middlename, lastname, address, zip, email, phone, mobile, sex, dob, comment, emailnotice, smsnotice, accepturl, declineurl, foadacc, foadcos, foadsec, foadnotsec, foadelm) values (\'' . $thePostArray['MemberFirstname'] . '\', \'' . $thePostArray['MemberMiddlename'] . '\', \'' . $thePostArray['MemberLastname'] . '\', \'' . $thePostArray['MemberAdress'] . '\', \'' . $thePostArray['MemberZip'] . '\', \'' . $thePostArray['MemberEmail'] . '\', \'' . $thePostArray['MemberPhone'] . '\', \'' . $thePostArray['MemberMobile'] . '\', \'' . $thePostArray['MemberSex'] . '\', \'' . $thePostArray['MemberBirth'] . '\', \'' . $thePostArray['MemberComment'] . '\', \'' . $thePostArray['MemberEmailNotice'] . '\', \'' . $thePostArray['MemberSMSNotice'] . '\', \'' . $thePostArray['ACCEPTURL'] . '\', \'' . $thePostArray['DECLINEURL'] . '\', \'' . $thePostArray['FOADACC'] . '\', \'' . $thePostArray['FOADCOS'] . '\', \'' . $thePostArray['FOADSEC'] . '\', \'' . $thePostArray['FOADNOTSEC'] . '\', \'' . $thePostArray['FOADELM'] . '\');', $inscon);

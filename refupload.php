@@ -62,14 +62,14 @@ function validateUpl()
 		else
 		{
 			$_POST["date"] = substr($_POST["date"], 2);
-			if (file_exists("refs/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf"))
+			if (file_exists("referater/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf"))
 			{
-				echo "refs/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf" . " findes i forvejen.";
+				echo "referater/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf" . " findes i forvejen.";
 			}
 			else
 			{
+				copy($_FILES["file"]["tmp_name"], "referater/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf");
 				echo "Referat uploadet: " .  $_POST["date"] . "_" . $_POST["type"] . ".pdf";
-				move_uploaded_file($_FILES["file"]["tmp_name"], "refs/" . $_POST["date"] . "_" . $_POST["type"] . ".pdf");
 			}
 		}
 		echo "<hr />";
@@ -84,7 +84,7 @@ function validateUpl()
 				<input type="radio" id="andetradio" name="type" value="andet" /><input type="text" id="andet" />
 				<br />
 				<label for="date">møde dato:&nbsp;</label><script>DateInput('date', true, 'YYYYMMDD')</script>
-				<input type="hidden" id="date" />
+				
 				
 				<label for="file">referat:&nbsp;</label>
 				<input type="file" name="file" id="file" accept="application/pdf" /> 

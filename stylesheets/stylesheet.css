@@ -17,6 +17,11 @@ table { /* Tabeller skal te sig ordentligt */
 	position:relative;
 }
 
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
 table, tr, td{
 	border: 0;
 	margin: 0;
@@ -105,7 +110,7 @@ hr {
 div.legend{
 	position:absolute;
 	left: -999em;
-	background-image: url('../images/75.png');
+	background-image: url('../billeder/75.png');
 	padding: 0.5em 0.5em 0.5em 0.5em;
 	border: solid 2px #cb391d;
 	text-align: left;
@@ -186,7 +191,7 @@ h2
 	text-align: center;
 }
 
-#footer img
+img
 {
 	border-style:none;
 }
@@ -213,6 +218,22 @@ h2
 	margin-left: 13px;
 }
 
+.gal {
+	margin-left: 4px;
+	width: auto;
+	text-align: center;
+	line-height: .6em;
+}
+
+.galcap{
+	font-size: x-small;
+}
+
+.galdate{
+	font-size: x-small;
+	color: gray;
+}
+
 #nav a:hover, #nav a:active
 {
 	color: #cb391d;
@@ -228,7 +249,7 @@ h2
 	position:absolute;
 	width: 10em;
 	left: -999em;
-	background-image: url('../images/75.png');
+	background-image: url('../billeder/75.png');
 	padding: 0.5em 0 0.5em 0;
 	border: solid 2px #cb391d;
 	border-top: none;

@@ -1,7 +1,7 @@
 <?php include_once 'includes/header.php';?>
 <?php include_once 'includes/ads.php';?>
 <?php include_once 'includes/stylehelper.php'; ?>
-<?php (!isset($_GET['id']))?$style = fetch_style_index():$style = fetch_style_for(htmlentities($_GET['id'])); ?>
+<?php (!isset($_GET['id']))?$style = fetch_style_index():$style = fetch_style_for(mysql_real_escape_string($_GET['id'])); ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

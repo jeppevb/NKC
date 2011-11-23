@@ -3,7 +3,7 @@
 include_once 'includes/dbcrudconfig.php';
 if (isset($_GET['krums'])) {
 
-	$hash = htmlentities($_GET['krums']);
+	$hash = mysql_real_escape_string($_GET['krums']);
 	$query_result = mysql_query('select * from waiting_signups where urlhash = \'' . $hash . '\'', $inscon);
 	$result;
 	if (!($result = mysql_fetch_array($query_result))) {

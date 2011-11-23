@@ -27,11 +27,11 @@
 		<h1>Velkommen til Nordjysk Kampsportscenter</h1>
 		<table>
 		<tr><td style="width:20em; vertical-align: top;">
-		<img src="/images/jjkids.png" style="width: 17em;" alt="Børn træner bevægelse på gulvet"/><br />
-		<img src="/images/jeppeguillo.png" style="width: 17em;" alt="Jeppe strangulerer sin modstander med guillotine" />
-		<img src="/images/thomasbar.png" style="width: 17em;" alt="Thomas laver en armbar på sin modstander"/><br />
-		<img src="/images/pallfightBW.png" style="width: 17em;" alt="Páll i ringen til fightergalla"/><br />	
-		<img src="/images/larsgnp.png" style="width: 17em;" alt="Lars slår sin modstander fra mount"/><br />
+		<img src="/billeder/jjkids.png" style="width: 17em;" alt="Børn træner bevægelse på gulvet"/><br />
+		<img src="/billeder/jeppeguillo.png" style="width: 17em;" alt="Jeppe strangulerer sin modstander med guillotine" />
+		<img src="/billeder/thomasbar.png" style="width: 17em;" alt="Thomas laver en armbar på sin modstander"/><br />
+		<img src="/billeder/pallfightBW.png" style="width: 17em;" alt="Páll i ringen til fightergalla"/><br />	
+		<img src="/billeder/larsgnp.png" style="width: 17em;" alt="Lars slår sin modstander fra mount"/><br />
 		</td><td style="vertical-align: top;"><?php show_news_headlines(6); ?><a href="/nyheder" style="font-size: x-small;">flere...</a></td></tr>
 		</table>
 			

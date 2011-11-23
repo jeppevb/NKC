@@ -48,15 +48,17 @@ function show_menu() {
 	echo '			</li>' . PHP_EOL;
 	echo '			<li><a href="/nyheder">Nyheder</a>' . PHP_EOL;
 	echo '			</li>' . PHP_EOL;
+	echo '			<li><a href="/foto">Foto</a>' . PHP_EOL;
+	echo '			</li>' . PHP_EOL;
 	echo '		</ul>' . PHP_EOL;
 }
 
 function show_topbanner() {
-echo '		<span><img alt="Nkclogo" src="/images/nkclogo.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Aikido" src="/images/aikido.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Fairtex" src="/images/fairtex2.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Muay" src="/images/muay.png" />' . PHP_EOL;
-echo '		</span> <span><img alt="Jj" src="/images/jj.png" />' . PHP_EOL;
+echo '		<span><img alt="Nkclogo" src="/billeder/nkclogo.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Aikido" src="/billeder/aikido.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Fairtex" src="/billeder/fairtex2.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Muay" src="/billeder/muay.png" />' . PHP_EOL;
+echo '		</span> <span><img alt="Jj" src="/billeder/jj.png" />' . PHP_EOL;
 echo '		</span>' . PHP_EOL;
 }
 

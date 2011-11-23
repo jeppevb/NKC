@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/dbqueryconfig.php';
 session_start();
-$login = htmlentities($_POST['login']);
+$login = mysql_real_escape_string($_POST['login']);
 $password = hash('sha256', $_POST['password']);
 
 $qry='SELECT id FROM admins WHERE upper(login)=\'' . strtoupper($login) . '\' AND password=\'' . $password . '\'';

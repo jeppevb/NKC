@@ -1,7 +1,7 @@
 <?php include_once 'includes/header.php';?>
 <?php include_once 'includes/ads.php';?>
 <?php include_once 'includes/newshelper.php';?>
-<?php $mynews = array(); if(!isset($_GET['id'])) header('location: /nyheder'); else $myNews = fetch_news_for(htmlentities($_GET['id'])); ?>
+<?php $mynews = array(); if(!isset($_GET['id'])) header('location: /nyheder'); else $myNews = fetch_news_for(mysql_real_escape_string($_GET['id'])); ?>
 <?php session_start();?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -31,7 +31,7 @@
 			<?php
 			
 			if(isset($_SESSION['SESS_ADMIN_ID'])){
-				echo '<p><a href="/opret_nyheder/rmnews/' . htmlentities($_GET['id']) . '">slet</a>&nbsp<a href="/opret_nyheder/chnews/' . htmlentities($_GET['id']) . '">ret</a></p>';
+				echo '<p><a href="/opret_nyheder/rmnews/' . mysql_real_escape_string($_GET['id']) . '">slet</a>&nbsp<a href="/opret_nyheder/chnews/' . mysql_real_escape_string($_GET['id']) . '">ret</a></p>';
 			}
 			?>
 		</div>

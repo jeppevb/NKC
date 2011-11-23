@@ -14,34 +14,84 @@ function printGalleries(){
 		echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>' . PHP_EOL;
 	}
 }
+
 if (isset($_GET['action'])) {
 	switch ($_GET['action']){
 		case "upload":
-			if (isset($_FILES["file"]) && isset($_POST["newname"]) && isset($_POST["gallery"])) {
-				$i = 0;
+			if (isset($_FILES["file"]) && isset($_POST["gallery"])) {
 				global $qcon;
-				$result = mysql_query('SELECT id, name FROM galleries', $qcon);
-				$galleryfoldername;
-				foreach ($_FILES["pictures"]["error"] as $key => $error) {
+				$result = mysql_query('SELECT foldername FROM galleries where id = ' . mysql_real_escape_string($_POST['gallery']) , $qcon);
+				$row = mysql_fetch_array($result);
+								
+				$galleryfolder = $row['foldername'];
+				foreach ($_FILES["file"]["error"] as $key => $error) {
 					if ($error == UPLOAD_ERR_OK) {
-						$tmp_name = $_FILES["pictures"]["tmp_name"][$key];
-						if ($_POST["newname"][$i] == "")
-							$name = $_POST["newname"][$i] . '.' . end(explode(".", $_FILES["pictures"]["name"][$key]));
+						$tmp_name = $_FILES["file"]["tmp_name"][$key];
+						if (isset($_POST["newname"]) && $_POST["newname"][$key] != "")
+							$name = mysql_real_escape_string($_POST["newname"][$key]) . '.' . end(explode(".", $_FILES["file"]["name"][$key]));
 						else
-							$name = $_FILES["pictures"]["name"][$key];
+							$name = mysql_real_escape_string($_FILES["file"]["name"][$key]);
 						
-						//vi skal lige tilføje et insert til db
-						//vi skal lige finde ud af hvad der skal stå i $galleryfolder
-						
-						move_uploaded_file($tmp_name, "billeder/" . $galleryfolder . "/" . $name);
-						$i++;
+						if (!file_exists("billeder/" . $galleryfolder . "/" . $name)) {
+							copy($tmp_name, "billeder/" . $galleryfolder . "/" . $name);
+							
+							list($width_orig, $height_orig) = getimagesize("billeder/" . $galleryfolder . "/" . $name);
+							
+							$src = "billeder/" . $galleryfolder . "/" . $name;
+							switch(strtolower(end(explode(".", $name)))){
+								case 'bmp': $img = imagecreatefromwbmp($src); break;
+								case 'gif': $img = imagecreatefromgif($src); break;
+								case 'jpg': $img = imagecreatefromjpeg($src); break;
+								case 'png': $img = imagecreatefrompng($src); break;
+								default : return "Unsupported picture type!";
+							}
+							
+							$thumbnail = imagecreatetruecolor(50, floor((50/$width_orig)*$height_orig));
+							$frontnail = imagecreatetruecolor(272, floor((272/$width_orig)*$height_orig));
+								
+							imagecopyresampled($thumbnail, $img, 0, 0, 0, 0,  50, floor(( 50/$width_orig)*$height_orig), $width_orig, $height_orig);
+							imagecopyresampled($frontnail, $img, 0, 0, 0, 0, 272, floor((272/$width_orig)*$height_orig), $width_orig, $height_orig);
+							
+							switch(strtolower(end(explode(".", $name)))){
+								case 'bmp': imagewbmp($thumbnail, "billeder/" . $galleryfolder . "/thumbnails/" . $name);
+											imagewbmp($frontnail, "billeder/" . $galleryfolder . "/frontnails/" . $name); 
+											break;
+								case 'gif': imagegif($thumbnail, "billeder/" . $galleryfolder . "/thumbnails/" . $name);
+											imagegif($frontnail, "billeder/" . $galleryfolder . "/frontnails/" . $name);
+											break;
+								case 'jpg': imagejpeg($thumbnail, "billeder/" . $galleryfolder . "/thumbnails/" . $name);
+											imagejpeg($frontnail, "billeder/" . $galleryfolder . "/frontnails/" . $name); 
+											break;
+								case 'png': imagepng($thumbnail, "billeder/" . $galleryfolder . "/thumbnails/" . $name);
+											imagepng($frontnail, "billeder/" . $galleryfolder . "/frontnails/" . $name);
+											break;
+								default : return "Unsupported picture type!";
+							}
+							imagedestroy($img);
+							imagedestroy($thumbnail);
+							imagedestroy($frontnail);
+							
+						}
+						mysql_query('insert into images (gallery_id, filename) values (\'' . mysql_real_escape_string($_POST['gallery']) . '\', \''  . $name . '\')', $inscon);
 					}
+					else
+					{
+						switch ($error) {
+							case UPLOAD_ERR_INI_SIZE:
+							$_SESSION['notification'] = 'Filen var for stor. Max er 2 megabyte.';
+							header('location: /notifikation');
+							break;
+						}
+					}	
 				}
 			}
 		break;
 		case "gallery":
-			mysql_query('insert into galleries (foldername, name, created) values (\'' . htmlentities($_POST['foldername']) . '\', \''  . htmlentities($_POST['galleryname']) . '\', sysdate())', $inscon);
+			mysql_query('insert into galleries (foldername, name, created) values (\'' . mysql_real_escape_string($_POST['foldername']) . '\', \'' . mysql_real_escape_string($_POST['galleryname']) . '\', sysdate())', $inscon);
 			echo mysql_error($inscon);
+			mkdir('billeder/'. addslashes($_POST['foldername']));
+			mkdir('billeder/'. addslashes($_POST['foldername'] . '/thumbnails'));
+			mkdir('billeder/'. addslashes($_POST['foldername'] . '/frontnails'));
 		break;
 	}
 }
@@ -55,7 +105,7 @@ if (isset($_GET['action'])) {
 <link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet"
 	type="text/css" />
 <link rel="icon" type="image/icon" href="/favicon.ico" />
-<title>Upload Referat - Nordjysk Kampsportscenter</title>
+<title>Upload Billeder - Nordjysk Kampsportscenter</title>
 
 <script type="text/javascript" src="includes/calendarDateInput.js">
 /***********************************************
@@ -68,16 +118,6 @@ if (isset($_GET['action'])) {
 <script type="text/javascript">
 function validateUpl()
 {
-	
-	if(document.getElementById("andetradio").checked == "checked" && document.getElementById("andet").value == ""){
-		alert("du har ikke skrevet noget i feltet");
-		return false;	
-	}
-
-	if(document.getElementById("file").value == ""){
-		alert("du har ikke valgt en fil");
-		return false;
-	}
 	return true;
 }
 
@@ -98,7 +138,9 @@ function validateGal()
 
 function addLine()
 {
-	document.getElementById("filestbl").innerHTML += "<tr><td><input type=\"file\" name=\"file[]\" accept=\"image/*\" /></td><td><input type=\"text\" id=\"newname[]\" /></td></tr>";
+	extraRow = document.createElement("tr");
+	extraRow.innerHTML = "<td><input type=\"file\" name=\"file[]\" accept=\"image/*\" /></td><td><input type=\"text\" name=\"newname[]\" /></td>";
+	document.getElementById("filestbl").appendChild(extraRow);
 	
 }
 </script>
@@ -125,15 +167,18 @@ function addLine()
 				<input type="submit" name="submit" value="Opret galleri" />
 			</form>
 			<br />
+			
 			<form onsubmit="return validateUpl();" action="/upload_billede/upload" method="post" enctype="multipart/form-data" >
 				<select name="gallery">
 				<?php printGalleries(); ?>	
 				</select>
 				<br /><br />
 				<input type="button" value="Flere linier?" onclick="addLine();" />
-				<table id="filestbl">
+				<table>
+				<tbody id="filestbl">
 				<tr><th>billede</th><th>omdøb til</th></tr>
-				<tr><td><input type="file" name="file[]" accept="image/*" /> </td><td><input type="text" id="newname[]" /></td></tr>
+				<tr><td><input type="file" name="file[]" accept="image/*" /></td><td><input type="text" name="newname[]" /></td></tr>
+				</tbody>
 				</table>
 				<input type="submit" name="submit" value="Upload filer" />
 			</form>

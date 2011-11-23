@@ -1,7 +1,7 @@
 <?php
 function printRefs() {
 	$refs = array();
-	if ($handle = opendir('refs')) {
+	if ($handle = opendir('referater')) {
 		while (false !== ($file = readdir($handle))) {
 			//110609_referat_nkc.pdf
 			$file = utf8_encode($file);
@@ -32,7 +32,7 @@ function printRefs() {
 			$meetingstring = $matches[4];
 		}
 
-		echo '<li><a href="ref/' . $refname . '">' . $meetingstring . ' ' . (ltrim($matches[3], '0')==''?'':'d. ' . ltrim($matches[3], '0') . '. ') . $months[ltrim($matches[2], '0') - 1] . ' 20' . $matches[1] . '</a></li>' . PHP_EOL;
+		echo '<li><a href="/referater/' . $refname . '">' . $meetingstring . ' ' . (ltrim($matches[3], '0')==''?'':'d. ' . ltrim($matches[3], '0') . '. ') . $months[ltrim($matches[2], '0') - 1] . ' 20' . $matches[1] . '</a></li>' . PHP_EOL;
 
 	}
 
